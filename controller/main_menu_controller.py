@@ -20,15 +20,15 @@ def get_callable(mouse):
 
 
 def clicked_on_play(mouse):
-    return False
+    return main_menu_graphics.is_play_button_pressed(mouse)
 
 
 def clicked_on_exit(mouse):
-    return True
+    return main_menu_graphics.is_exit_button_pressed(mouse)
 
 
 def clicked_on_settings(mouse):
-    return False
+    return main_menu_graphics.is_settings_button_pressed(mouse)
 
 
 def start():

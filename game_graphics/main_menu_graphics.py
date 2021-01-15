@@ -1,0 +1,4 @@
+import main_graphics
+import pygame.freetype
+
+main_graphics.checker_color

@@ -156,9 +156,7 @@ def local_controller_manager(settings):
         settings = local_controller(settings)
         main_controller.update_settings(settings)
         main_controller.init_application_window()
-        main_logic.test_magic2()
         local_controller = settings_loop(settings)
-
     return main_controller.call_main_menu()
 
 

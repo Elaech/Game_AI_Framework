@@ -5,6 +5,5 @@
   "board_width": 5,
   "board_height": 5,
   "simple_moves": [[-1,-1],[0,-1],[1,-1]],
-  "board_blocks": [],
-  "attack_moves": []
+  "board_blocks": []
 }

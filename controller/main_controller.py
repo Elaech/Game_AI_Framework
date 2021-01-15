@@ -1,7 +1,7 @@
 import pygame
 import json
 import game_logic
-import game_graphics
+from game_graphics import main_graphics
 import main_menu_controller
 import game_settings_controller
 import game_play_controller
@@ -40,6 +40,7 @@ def init_application_window():
     pygame.init()
     pygame.display.set_caption(settings["application_name"])
     application_screen = pygame.display.set_mode((settings["screen_width"], settings["screen_height"]))
+    main_graphics.init_graphics(application_screen, settings)
 
 
 def start_application():

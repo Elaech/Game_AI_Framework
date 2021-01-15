@@ -4,11 +4,14 @@ import main_menu_graphics
 
 window = None
 color_scheme = None
+settings = None
 
 
-def init_window(screen):
+def init_graphics(screen, options):
     global window
+    global settings
     window = screen
+    settings = options
 
 
 def init_colors():

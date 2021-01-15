@@ -33,6 +33,7 @@ def clicked_on_settings(mouse):
 
 def start():
     clock = pygame.time.Clock()
+    main_menu_graphics.draw_main_menu()
     while True:
         clock.tick(60)
         for event in pygame.event.get():

@@ -1,7 +1,8 @@
 import pygame.freetype
-from game_graphics import main_graphics
+import pygame
+from game_graphics import main_graphics as mg
 
 def draw_main_menu():
-    main_graphics.window.fill(main_graphics.color_scheme["background_color"])
-    main_graphics.draw_button(main_graphics.width*2/5, main_graphics.height*2/10,
-                              main_graphics.width/5, main_graphics.height*2/10, "Play")
+    mg.window.fill(mg.color_scheme["background_color"])
+    mg.draw_button(mg.width*2/5, mg.height*2/10, mg.width/5, mg.height*2/10, "Play")
+    pygame.display.update()

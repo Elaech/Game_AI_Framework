@@ -17,12 +17,13 @@ def init_graphics(screen, options):
     global button_text_size
     global width
     global height
+    settings = options
     height = settings["screen_height"]
     width = settings["screen_width"]
     button_text_size = 16
     font = pygame.freetype.SysFont("Arial", 16)
     window = screen
-    settings = options
+    init_colors()
 
 
 def init_colors():

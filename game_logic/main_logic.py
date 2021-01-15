@@ -1,4 +1,6 @@
+def check_winning_method():
+    return True
 
 
-if __name__ == '__main__':
-    print("sanky")
+def check_score_method():
+    return True

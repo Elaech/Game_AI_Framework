@@ -39,7 +39,7 @@ def call_quit():
     return quit
 
 
-def quit():
+def quit(settings):
     return None
 
 
@@ -52,19 +52,24 @@ def init_settings():
 def init_application_window():
     global application_screen
     pygame.init()
-    pygame.display.set_caption(settings["application_name"])
     application_screen = pygame.display.set_mode((settings["screen_width"], settings["screen_height"]))
+    pygame.display.set_caption(settings["application_name"])
     main_graphics.init_graphics(application_screen, settings)
 
 
 def start_application():
     controller_call = call_main_menu()
     while controller_call is not None:
-        controller_call = controller_call()
+        controller_call = controller_call(settings)
 
 
 def end_application():
     pygame.quit()
+
+
+def update_settings(options):
+    global settings
+    settings = options
 
 
 if __name__ == '__main__':

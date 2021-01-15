@@ -31,7 +31,7 @@ def clicked_on_settings(mouse):
     return main_menu_graphics.is_settings_button_pressed(mouse)
 
 
-def start():
+def start(settings):
     clock = pygame.time.Clock()
     main_menu_graphics.draw_main_menu()
     while True:
@@ -39,7 +39,7 @@ def start():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return None
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONUP:
                 controller = get_callable(pygame.mouse.get_pos())
                 if controller is not None:
                     return controller

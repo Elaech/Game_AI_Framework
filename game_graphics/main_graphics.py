@@ -1,6 +1,5 @@
 import pygame
 import json
-import main_menu_graphics
 
 window = None
 color_scheme = None

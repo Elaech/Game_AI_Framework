@@ -80,8 +80,9 @@ def modify_board(settings):
     board_blocks = settings["board_blocks"]
     board = numpy.full((settings["board_width"], settings["board_height"]), False, dtype=bool)
     for el in board_blocks:
-        settings_menu_graphics.color_select_space(el[0], el[1], True)
-        board[el[0]][el[1]] = True
+        if el[0] < settings["board_height"] and el[1] < settings["board_width"]:
+            settings_menu_graphics.color_select_space(el[0], el[1], True)
+            board[el[0]][el[1]] = True
     while True:
         clock.tick(60)
         for event in pygame.event.get():
@@ -89,6 +90,12 @@ def modify_board(settings):
                 return None
             elif event.type == pygame.MOUSEBUTTONUP:
                 if settings_menu_graphics.is_back_button_pressed(pygame.mouse.get_pos()):
+                    updated_blocked = []
+                    for index_i in range(len(board)):
+                        for index_j in range(len(board[0])):
+                            if board[index_i][index_j]:
+                                updated_blocked.append([index_i,index_j])
+                    settings["board_blocks"] = updated_blocked
                     return settings
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
                 if x != -1 and y != -1:
@@ -177,7 +184,6 @@ def local_controller_manager(settings):
         settings = local_controller(settings)
         main_controller.update_settings(settings)
         main_controller.init_application_window()
-        main_logic.test_magic2()
         local_controller = settings_loop(settings)
     return main_controller.call_main_menu()
 

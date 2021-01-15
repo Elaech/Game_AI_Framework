@@ -1,2 +1,3 @@
 def winning_method():
-    pass
+    return true
+

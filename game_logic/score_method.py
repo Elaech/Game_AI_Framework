@@ -1,2 +1,22 @@
 def score_method():
-    pass
+    if True:
+        if True:
+            return True
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

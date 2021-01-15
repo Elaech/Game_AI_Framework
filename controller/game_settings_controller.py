@@ -81,23 +81,25 @@ def modify_simple_moves(settings):
 
 
 def modify_winning_condition(settings):
+    pygame.quit()
+    with open("../game_logic/winning_method.py", "r") as win_method_file:
+        method = win_method_file.read()
+    code_text_interface("Change Winning Method", method)
+    if main_logic.check_score_method(input_text):
+        with open("../game_logic/winning_method.py", "w") as win_method_file:
+            win_method_file.write(input_text)
     return settings
 
 
 def modify_score_method(settings):
     pygame.quit()
-    number_text_interface("Change Board Width")
-    try:
-        number = int(input_text)
-        if number < 1:
-            return settings
-        settings["moves_per_turn"] = number
-        main_controller.update_settings(settings)
-    except Exception:
-        pass
+    with open("../game_logic/score_method.py", "r") as score_method_file:
+        method = score_method_file.read()
+    code_text_interface("Change Score Method", method)
+    if main_logic.check_score_method(input_text):
+        with open("../game_logic/score_method.py", "w") as score_method_file:
+            score_method_file.write(input_text)
     return settings
-
-
 
 
 def modify_moves_per_turn(settings):
@@ -108,7 +110,6 @@ def modify_moves_per_turn(settings):
         if number < 1:
             return settings
         settings["moves_per_turn"] = number
-        main_controller.update_settings(settings)
     except Exception:
         pass
     return settings
@@ -122,7 +123,6 @@ def modify_board_width(settings):
         if number < 4:
             return settings
         settings["board_width"] = number
-        main_controller.update_settings(settings)
     except Exception:
         pass
     return settings
@@ -136,7 +136,6 @@ def modify_board_height(settings):
         if number < 4:
             return settings
         settings["board_height"] = number
-        main_controller.update_settings(settings)
     except Exception:
         pass
     return settings
@@ -157,6 +156,7 @@ def local_controller_manager(settings):
         settings = local_controller(settings)
         main_controller.update_settings(settings)
         main_controller.init_application_window()
+        main_logic.test_magic2()
         local_controller = settings_loop(settings)
 
     return main_controller.call_main_menu()
@@ -181,7 +181,7 @@ def start(settings):
     return local_controller_manager(settings)
 
 
-def code_text_interface(title):
+def code_text_interface(title, method_code):
     global root
     global text_entry
 
@@ -202,7 +202,7 @@ def code_text_interface(title):
 
     text_entry = tkinter.Text(canvas, height=50, width=100)
     text_entry["font"] = text_font
-    text_entry.insert(0, "test string")
+    text_entry.insert(tkinter.INSERT, chars=method_code)
     text_entry.pack()
     submit_button = tkinter.Button(canvas, text="Submit", command=_callback)
     submit_button["font"] = button_font

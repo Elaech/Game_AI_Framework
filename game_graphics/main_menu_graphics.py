@@ -2,6 +2,9 @@ import pygame.freetype
 import pygame
 from game_graphics import main_graphics as mg
 
+"""
+Made by Pristavu Dumitru-Dragos
+"""
 
 def is_play_button_pressed(mouse):
     x = mouse[0]

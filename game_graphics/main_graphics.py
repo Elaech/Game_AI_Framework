@@ -32,6 +32,11 @@ def init_colors():
         color_scheme = json.load(settings_file)
 
 
+"""
+Draw button made by Pristavu Dumitru-Dragos
+"""
+
+
 def draw_button(x, y, button_width, button_height, button_text):
     window.fill(color_scheme["button_border"], (x, y, button_width, button_height))
     window.fill(color_scheme["button_color"], (x + 5, y + 5, button_width - 10, button_height - 10))

@@ -3,5 +3,6 @@
   "button_color":"#00001d",
   "text_color":"#d0dbce",
   "button_border":"#0d0d0d",
-  "line_color": "00001d"
+  "line_color":"00001d",
+  "board_cell_selection_color":"#992040"
 }

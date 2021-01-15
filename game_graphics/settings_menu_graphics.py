@@ -1,6 +1,9 @@
 import pygame
 from game_graphics import main_graphics as mg
 
+"""
+Made by Pristavu Dumitru-Dragos
+"""
 
 def is_back_button_pressed(mouse):
     x = mouse[0]
@@ -101,14 +104,39 @@ def is_define_win_condition_button_pressed(mouse):
         return False
 
 
-def draw_test_board():
+def get_board_click(mouse):
+    x = mouse[0]
+    y = mouse[1]
+    found_x = -1
+    found_y = -1
+    cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
+    for i in range(0, mg.settings["board_width"]):
+        if i * cell_dim <= x < (i + 1) * cell_dim:
+            found_x = i
+            break
+    for i in range(0, mg.settings["board_height"]):
+        if i * cell_dim <= y < (i + 1) * cell_dim:
+            found_y = i
+            break
+    return found_x, found_y
+
+
+def color_select_space(x, y, color_type):
+    cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
+    if color_type:
+        mg.window.fill(mg.color_scheme["board_cell_selection_color"],
+                       (x * cell_dim + 1, y * cell_dim + 1, cell_dim - 1, cell_dim - 1))
+    else:
+        mg.window.fill(mg.color_scheme["background_color"],
+                       (x * cell_dim + 1, y * cell_dim + 1, cell_dim - 1, cell_dim - 1))
+
+
+def draw_move_board():
     mg.window.fill(mg.color_scheme["background_color"])
-    board_pixel_width = mg.width * 3 / 4
-    board_pixel_height = mg.height * 3 / 4
+    board_pixel_width = mg.width
+    board_pixel_height = mg.height
     board_columns = mg.settings["board_width"]
     board_rows = mg.settings["board_height"]
-    board_rows = 10
-    board_columns = 5
     cell_dim = min(board_pixel_height/board_rows, board_pixel_width/board_columns)
     for i in range(1, board_columns):
         pygame.draw.line(mg.window, mg.color_scheme["text_color"],
@@ -126,6 +154,8 @@ def draw_test_board():
                      (1, cell_dim * board_rows), (cell_dim * board_columns, cell_dim * board_rows), 3)
     pygame.draw.line(mg.window, mg.color_scheme["text_color"],
                      (cell_dim * board_columns, 1), (cell_dim * board_columns, cell_dim * board_rows), 3)
+    mg.draw_button(mg.width * 17 / 20, mg.height * 17 / 20,
+                   mg.width * 2 / 20, mg.height * 2 / 20, "Back")
 
 
 def draw_settings_menu():
@@ -151,5 +181,4 @@ def draw_settings_menu():
                    width_proportion * 6, height_proportion * 2, "Define Board")
     mg.draw_button(width_proportion * 12, height_proportion * 12,
                    width_proportion * 6, height_proportion * 2, "Define Win Condition")
-    draw_test_board()
     pygame.display.update()

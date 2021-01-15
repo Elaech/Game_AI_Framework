@@ -1,5 +1,26 @@
 from controller import main_controller
 from game_graphics import settings_menu_graphics
+import pygame
+import tkinter
+
+
+def clicked_on_back(mouse):
+    return False
+
+
+def clicked_on_board_width(mouse):
+    return False
+
+
+def clicked_on_board_height(mouse):
+    return False
+
+
+def clicked_on_alfabeta(mouse):
+    return False
+
+def clicked_on_simple_moves(mouse):
+    return False
 
 
 def start():
@@ -11,6 +32,4 @@ def start():
             if event.type == pygame.QUIT:
                 return None
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                controller = get_callable(pygame.mouse.get_pos())
-                if controller is not None:
-                    return controller
+                print("Text menu")

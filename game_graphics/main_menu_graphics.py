@@ -1,4 +1,6 @@
-import main_graphics
+import main_graphics as mg
 import pygame.freetype
 
-main_graphics.checker_color
+mg.checker_color
+
+#def draw_main_menu():

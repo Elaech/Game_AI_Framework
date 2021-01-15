@@ -1,4 +1,4 @@
-import main_controller
+from controller import main_controller
 import pygame
 from game_graphics import main_menu_graphics
 

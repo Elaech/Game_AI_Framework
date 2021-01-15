@@ -30,14 +30,18 @@ def call_main_menu():
 def call_game_settings():
     return game_settings_controller.start
 
+
 def call_play():
     return game_play_controller.start
+
 
 def call_quit():
     return quit
 
+
 def quit():
     return None
+
 
 def init_settings():
     global settings

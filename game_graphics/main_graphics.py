@@ -35,7 +35,3 @@ def draw_button(x, y, button_width, button_height, button_text):
     window.fill(color_scheme["button_border"], (x, y, button_width, button_height))
     window.fill(color_scheme["button_color"], (x + 5, y + 5, button_width - 10, button_height - 10))
     font.render_to(window, (x, y), button_text, color_scheme["text_color"])
-
-
-if __name__ == '__main__':
-    print("Sunt un main!")

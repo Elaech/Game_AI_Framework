@@ -1,5 +1,5 @@
 import pygame.freetype
-
+from game_graphics import main_graphics
 
 def draw_main_menu():
     main_graphics.window.fill(main_graphics.color_scheme["background_color"])

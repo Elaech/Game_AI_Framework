@@ -125,10 +125,11 @@ def color_select_space(x, y, color_type):
     cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
     if color_type:
         mg.window.fill(mg.color_scheme["board_cell_selection_color"],
-                       (x * cell_dim + 1, y * cell_dim + 1, cell_dim - 1, cell_dim - 1))
+                       (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
     else:
         mg.window.fill(mg.color_scheme["background_color"],
-                       (x * cell_dim + 1, y * cell_dim + 1, cell_dim - 1, cell_dim - 1))
+                       (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
+    pygame.display.update()
 
 
 def draw_move_board():
@@ -156,6 +157,7 @@ def draw_move_board():
                      (cell_dim * board_columns, 1), (cell_dim * board_columns, cell_dim * board_rows), 3)
     mg.draw_button(mg.width * 17 / 20, mg.height * 17 / 20,
                    mg.width * 2 / 20, mg.height * 2 / 20, "Back")
+    pygame.display.update()
 
 
 def draw_settings_menu():

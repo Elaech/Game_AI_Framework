@@ -1,3 +1,5 @@
+import numpy
+
 from controller import main_controller
 from game_graphics import settings_menu_graphics
 import pygame
@@ -73,6 +75,25 @@ def get_callable(mouse):
 
 
 def modify_board(settings):
+    clock = pygame.time.Clock()
+    settings_menu_graphics.draw_move_board()
+    board_blocks = settings["board_blocks"]
+    board = numpy.full((settings["board_width"], settings["board_height"]), False, dtype=bool)
+    for el in board_blocks:
+        settings_menu_graphics.color_select_space(el[0], el[1], True)
+        board[el[0]][el[1]] = True
+    while True:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return None
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if settings_menu_graphics.is_back_button_pressed(pygame.mouse.get_pos()):
+                    return settings
+                x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
+                if x != -1 and y != -1:
+                    board[x][y] = (not board[x][y])
+                    settings_menu_graphics.color_select_space(x, y, board[x][y])
     return settings
 
 
@@ -156,6 +177,7 @@ def local_controller_manager(settings):
         settings = local_controller(settings)
         main_controller.update_settings(settings)
         main_controller.init_application_window()
+        main_logic.test_magic2()
         local_controller = settings_loop(settings)
     return main_controller.call_main_menu()
 
@@ -198,7 +220,7 @@ def code_text_interface(title, method_code):
     canvas = tkinter.Canvas(root)
     canvas.pack()
 
-    text_entry = tkinter.Text(canvas, height=50, width=100)
+    text_entry = tkinter.Text(canvas, height=30, width=100)
     text_entry["font"] = text_font
     text_entry.insert(tkinter.INSERT, chars=method_code)
     text_entry.pack()

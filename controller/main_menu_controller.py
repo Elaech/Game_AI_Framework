@@ -1,4 +1,9 @@
 import main_controller
 
-def start_main_menu_controller():
-    pass
+"""
+Main Menu controller that controls the interaction between the user and the application's main menu
+"""
+
+
+def start():
+    print("Main Menu")

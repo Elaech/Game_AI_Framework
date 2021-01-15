@@ -3,6 +3,8 @@ import json
 import game_logic
 import game_graphics
 import main_menu_controller
+import game_settings_controller
+import game_play_controller
 
 """
 Main Controller of the application
@@ -19,6 +21,14 @@ Controller Methods
 """
 
 
+def call_main_menu():
+    return main_menu_controller.start
+
+
+def call_game_settings():
+    return game_settings_controller.start
+
+
 def init_settings():
     global settings
     with open("../resources/settings.json") as settings_file:
@@ -33,7 +43,7 @@ def init_application_window():
 
 
 def start_application():
-    controller_call = main_menu_controller.start_main_menu_controller()
+    controller_call = call_main_menu()
     while controller_call is not None:
         controller_call = controller_call()
 

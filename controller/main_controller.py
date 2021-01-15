@@ -2,16 +2,48 @@ import pygame
 import json
 import game_logic
 import game_graphics
+import main_menu_controller
 
 """
 Main Controller of the application
+Contains methods of initialisation and calls to other controllers
+"""
+
+"""
+Global Variables
+"""
+settings = None
+application_screen = None
+"""
+Controller Methods
 """
 
 
+def init_settings():
+    global settings
+    with open("../resources/settings.json") as settings_file:
+        settings = json.load(settings_file)
+
+
+def init_application_window():
+    global application_screen
+    pygame.init()
+    pygame.display.set_caption(settings["application_name"])
+    application_screen = pygame.display.set_mode((settings["screen_width"], settings["screen_height"]))
+
+
+def start_application():
+    controller_call = main_menu_controller.start_main_menu_controller()
+    while controller_call is not None:
+        controller_call = controller_call()
+
+
+def end_application():
+    pygame.quit()
+
 
 if __name__ == '__main__':
-    with open("../resources/settings.json","r") as settings_file:
-        settings = json.load(settings_file)
-    for el in settings:
-        print(el, settings[el])
-    print(settings["magic"]["number"])
+    init_settings()
+    init_application_window()
+    start_application()
+    end_application()

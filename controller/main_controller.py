@@ -9,6 +9,8 @@ import game_play_controller
 """
 Main Controller of the application
 Contains methods of initialisation and calls to other controllers
+
+Made by Minut Mihai Dimitrie
 """
 
 """

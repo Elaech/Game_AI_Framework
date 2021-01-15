@@ -4,6 +4,8 @@ from game_graphics import main_menu_graphics
 
 """
 Main Menu controller that controls the interaction between the user and the application's main menu
+
+Made by Minut Mihai Dimitrie
 """
 
 
@@ -32,6 +34,7 @@ def clicked_on_settings(mouse):
 def start():
     clock = pygame.time.Clock()
     while True:
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return None

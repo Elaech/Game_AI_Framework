@@ -14,11 +14,11 @@ def init_game_graphics():
     global board_pixel_height
     global board_pixel_width
     global cell_dim
-    cell_dim = min(board_pixel_height / board_height, board_pixel_width / board_width)
     board_width = mg.settings["board_width"]
     board_height = mg.settings["board_height"]
     board_pixel_width = mg.settings["screen_width"] * 17 / 20
     board_pixel_height = mg.settings["screen_height"]
+    cell_dim = min(board_pixel_height / board_height, board_pixel_width / board_width)
 
 
 def is_back_button_pressed(mouse):

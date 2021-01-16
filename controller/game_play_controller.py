@@ -78,7 +78,7 @@ def draw_hover(line, column, changes):
         elif game_logic.is_pos_within_bounds(column + change[0], line + change[1]) and change[1] == 0 \
                 and change[0] == 0:
             play_game_graphics.color_hover_cell(line, column)
-            play_game_graphics.draw_player_piece(line, column,True)
+            play_game_graphics.draw_selected_piece(line, column)
             hovers.append([line, column])
     return hovers
 
@@ -108,6 +108,7 @@ def HUMAN_turn(settings):
                         if selected_piece is None:
                             selected_piece = [line, column]
                             last_hover = draw_hover(line, column, settings["simple_moves"])
+                            play_game_graphics.draw_selected_piece(selected_piece[0], selected_piece[1])
                         elif line == selected_piece[0] and column == selected_piece[1]:
                             if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line):
                                 game_logic.make_move(selected_piece[1], selected_piece[0], column, line)
@@ -117,7 +118,9 @@ def HUMAN_turn(settings):
                                 return False
                         else:
                             delete_hover(last_hover, selected_piece)
+                            play_game_graphics.draw_player_piece(selected_piece[0], selected_piece[1], True)
                             selected_piece = [line, column]
+                            play_game_graphics.draw_selected_piece(selected_piece[0], selected_piece[1])
                             last_hover = draw_hover(line, column, settings["simple_moves"])
                     elif game_logic.is_my_piece(game_logic.PosTypes.EMPTY, column, line) and selected_piece is not None:
                         if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line):

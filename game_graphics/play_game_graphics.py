@@ -84,6 +84,7 @@ def draw_selected_piece(x, y):
                        ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
     pygame.draw.circle(mg.window, mg.color_scheme["AI_piece_color"],
                        ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 5)
+    pygame.display.update()
 
 
 def color_blocked_cell(x, y):
@@ -121,4 +122,4 @@ def draw_play_board():
     mg.draw_button(mg.width * 17 / 20, mg.height * 17 / 20,
                    mg.width * 2 / 20, mg.height * 2 / 20, "Back")
     pygame.display.update()
-    
+

@@ -120,7 +120,7 @@ def get_board_click(mouse):
     y = mouse[1]
     found_x = -1
     found_y = -1
-    cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
+    cell_dim = min(mg.height / mg.settings["board_height"], (mg.width * 17 / 20) / mg.settings["board_width"])
     for i in range(0, mg.settings["board_width"]):
         if i * cell_dim <= x < (i + 1) * cell_dim:
             found_x = i
@@ -133,7 +133,7 @@ def get_board_click(mouse):
 
 
 def color_select_space(x, y, color_type):
-    cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
+    cell_dim = min(mg.height / mg.settings["board_height"], (mg.width * 17 / 20) / mg.settings["board_width"])
     if color_type:
         mg.window.fill(mg.color_scheme["board_cell_selection_color"],
                        (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
@@ -144,7 +144,7 @@ def color_select_space(x, y, color_type):
 
 
 def draw_player_piece(x, y, piece_type):
-    cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
+    cell_dim = min(mg.height / mg.settings["board_height"], (mg.width * 17 / 20) / mg.settings["board_width"])
     if piece_type:
         pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
                            ((x+0.5)*cell_dim, (y+0.5)*cell_dim), cell_dim / 2)
@@ -153,12 +153,11 @@ def draw_player_piece(x, y, piece_type):
                            ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 2)
     pygame.display.update()
 
-def draw_move_board():
+
+def draw_move_board(board_columns, board_rows):
     mg.window.fill(mg.color_scheme["background_color"])
-    board_pixel_width = mg.width
+    board_pixel_width = mg.width * 17 / 20
     board_pixel_height = mg.height
-    board_columns = mg.settings["board_width"]
-    board_rows = mg.settings["board_height"]
     cell_dim = min(board_pixel_height/board_rows, board_pixel_width/board_columns)
     for i in range(1, board_columns):
         pygame.draw.line(mg.window, mg.color_scheme["text_color"],

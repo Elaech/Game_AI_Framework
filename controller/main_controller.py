@@ -1,6 +1,5 @@
 import pygame
 import json
-import game_logic
 from game_graphics import main_graphics
 import main_menu_controller
 import game_settings_controller

@@ -20,6 +20,12 @@ def start(settings):
     clock = pygame.time.Clock()
     play_game_graphics.init_game_graphics()
     play_game_graphics.draw_play_board()
+    for piece in ai_pieces:
+        play_game_graphics.draw_player_piece(piece[0], piece[1], False)
+    for piece in human_pieces:
+        play_game_graphics.draw_player_piece(piece[0], piece[1], True)
+    for position in settings["board_blocks"]:
+        play_game_graphics.color_blocked_cell(position[0], position[1])
     while True:
         clock.tick(60)
         for event in pygame.event.get():

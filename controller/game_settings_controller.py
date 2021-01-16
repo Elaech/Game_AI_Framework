@@ -1,5 +1,5 @@
 import numpy
-
+import copy
 from controller import main_controller
 from game_graphics import settings_menu_graphics
 import pygame
@@ -86,14 +86,15 @@ def modify_board(settings):
     board_blocks = settings["board_blocks"]
     board = numpy.full((settings["board_width"], settings["board_height"]), False, dtype=bool)
     for el in board_blocks:
-        if el[0] < settings["board_height"] and el[1] < settings["board_width"]:
+        if el[0] < settings["board_width"] and el[1] < settings["board_height"]:
             settings_menu_graphics.color_select_space(el[0], el[1], True)
             board[el[0]][el[1]] = True
-    while True:
+    local_quit = False
+    while not local_quit:
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return None
+                local_quit = True
             elif event.type == pygame.MOUSEBUTTONUP:
                 if settings_menu_graphics.is_back_button_pressed(pygame.mouse.get_pos()):
                     updated_blocked = []
@@ -102,7 +103,7 @@ def modify_board(settings):
                             if board[index_i][index_j]:
                                 updated_blocked.append([index_i, index_j])
                     settings["board_blocks"] = updated_blocked
-                    return settings
+                    local_quit = True
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
                 if x != -1 and y != -1:
                     board[x][y] = (not board[x][y])
@@ -111,7 +112,39 @@ def modify_board(settings):
 
 
 def modify_simple_moves(settings):
-    return settings
+    clock = pygame.time.Clock()
+    saved_settings = copy.deepcopy(settings)
+    local_width = int(settings["board_width"] * 1.5)
+    local_height = int(settings["board_height"] * 1.5)
+    if local_width % 2 == 0:
+        local_width += 1
+    if local_height % 2 == 0:
+        local_height += 1
+    settings["board_width"] = local_width
+    settings["board_height"] = local_height
+    main_controller.update_settings(settings)
+    settings_menu_graphics.draw_move_board()
+    board = numpy.full((local_width, local_height), False, dtype=bool)
+    settings_menu_graphics.draw_player_piece(local_height // 2, local_width // 2, True)
+    local_quit = False
+    while not local_quit:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                local_quit = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if settings_menu_graphics.is_back_button_pressed(pygame.mouse.get_pos()):
+                    updated_blocked = []
+                    for index_i in range(len(board)):
+                        for index_j in range(len(board[0])):
+                            if board[index_i][index_j]:
+                                updated_blocked.append([index_i, index_j])
+                    local_quit = True
+                x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
+                if x != -1 and y != -1:
+                    board[x][y] = (not board[x][y])
+                    settings_menu_graphics.color_select_space(x, y, board[x][y])
+    return saved_settings
 
 
 def modify_winning_condition(settings):

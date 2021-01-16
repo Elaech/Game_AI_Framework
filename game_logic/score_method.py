@@ -1,2 +1,3 @@
 def score_method():
-    return False
+    return 10
+

@@ -154,10 +154,12 @@ def draw_player_piece(x, y, piece_type):
     pygame.display.update()
 
 
-def draw_move_board(board_columns, board_rows):
+def draw_move_board():
     mg.window.fill(mg.color_scheme["background_color"])
     board_pixel_width = mg.width * 17 / 20
     board_pixel_height = mg.height
+    board_columns = mg.settings["board_width"]
+    board_rows = mg.settings["board_height"]
     cell_dim = min(board_pixel_height/board_rows, board_pixel_width/board_columns)
     for i in range(1, board_columns):
         pygame.draw.line(mg.window, mg.color_scheme["text_color"],

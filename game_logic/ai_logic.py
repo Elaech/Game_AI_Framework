@@ -1,7 +1,6 @@
-import main_logic
-import game_logic
+
 import math
-from game_logic.game_logic import PosTypes, legal_move, make_move, there_are_possible_moves
+from game_logic import game_logic
 
 settings = None
 
@@ -32,12 +31,12 @@ def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
         max_eval = -math.inf
         for i in range(0, settings["board_height"]):
             for j in range(0, settings["board_width"]):
-                if board[i][j] == PosTypes.AI:
+                if board[i][j] == game_logic.PosTypes.AI:
                     for move in settings["simple_moves"]:
-                        if legal_move(i, j, i - move[0], j - move[1]):
-                            make_move(i, j, i - move[0], j - move[1])
+                        if game_logic.legal_move(i, j, i - move[0], j - move[1]):
+                            game_logic.make_move(i, j, i - move[0], j - move[1])
                             eval = minmax(board, depth - 1, False, score_heuristic, win_heuristic)
-                            make_move(i - move[0], j - move[1], i, j)
+                            game_logic.make_move(i - move[0], j - move[1], i, j)
                             max_eval = max(max_eval, eval)
 
         return max_eval
@@ -46,11 +45,11 @@ def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
         min_eval = math.inf
         for i in range(0, settings["board_height"]):
             for j in range(0, settings["board_width"]):
-                if board[i][j] == PosTypes.HUMAN:
+                if board[i][j] == game_logic.PosTypes.HUMAN:
                     for move in settings["simple_moves"]:
-                        if legal_move(i, j, i + move[0], j + move[1]):
-                            make_move(i, j, i + move[0], j + move[1])
+                        if game_logic.legal_move(i, j, i + move[0], j + move[1]):
+                            game_logic.make_move(i, j, i + move[0], j + move[1])
                             eval = minmax(board, depth - 1, True, score_heuristic, win_heuristic)
-                            make_move(i + move[0], j + move[1], i, j)
+                            game_logic.make_move(i + move[0], j + move[1], i, j)
                             min_eval = min(min_eval, eval)
         return min_eval

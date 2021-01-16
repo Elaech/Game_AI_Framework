@@ -181,10 +181,12 @@ def there_are_possible_moves(player_type):
 
 
 def make_move(initial_line, initial_column, after_line, after_column):
-    board[after_line][after_column] = board[initial_line][initial_column]
-    board[initial_line][initial_column] = PosTypes.EMPTY
-    charge_up_turn()
-
+    if initial_line == after_line and initial_column == after_column:
+        charge_up_turn()
+    else:
+        board[after_line][after_column] = board[initial_line][initial_column]
+        board[initial_line][initial_column] = PosTypes.EMPTY
+        charge_up_turn()
 
 def is_my_piece(player_type, line, column):
     if player_type == board[line][column]:

@@ -14,8 +14,8 @@ def start(settings):
     game_logic.update_settings(settings)
     game_logic.init_blocked_positions()
     main_controller.update_settings(settings)
-    if main_logic.check_winning_method() is False or \
-            main_logic.check_score_method() is False:
+    if main_logic.check_winning_method(settings) is False or \
+            main_logic.check_score_method(settings) is False:
         return main_controller.call_main_menu()
     play_game_graphics.init_game_graphics()
     play_game_graphics.draw_play_board()

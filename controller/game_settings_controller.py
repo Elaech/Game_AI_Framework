@@ -173,7 +173,7 @@ def modify_winning_condition(settings):
     with open("../game_logic/winning_method.py", "r") as win_method_file:
         method = win_method_file.read()
     code_text_interface("Change Winning Method", method)
-    if main_logic.check_winning_method(input_text):
+    if main_logic.check_winning_method(settings, string=input_text):
         with open("../game_logic/winning_method.py", "w") as win_method_file:
             win_method_file.write(input_text)
     return settings
@@ -184,7 +184,7 @@ def modify_score_method(settings):
     with open("../game_logic/score_method.py", "r") as score_method_file:
         method = score_method_file.read()
     code_text_interface("Change Score Method", method)
-    if main_logic.check_score_method(input_text):
+    if main_logic.check_score_method(settings, string=input_text):
         with open("../game_logic/score_method.py", "w") as score_method_file:
             score_method_file.write(input_text)
     return settings

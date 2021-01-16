@@ -127,9 +127,9 @@ def somebody_won():
 
 
 def is_pos_within_bounds(line, column):
-    if column > settings["board_width"] or column < 0:
+    if column >= settings["board_width"] or column < 0:
         return False
-    if line > settings["board_height"] or line < 0:
+    if line >= settings["board_height"] or line < 0:
         return False
     return True
 

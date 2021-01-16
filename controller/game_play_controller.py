@@ -31,8 +31,10 @@ def start(settings):
         if game_logic.somebody_won() is not None:
             if game_logic.somebody_won() is True:
                 HUMAN_won("HUMAN acomplished the objective")
+                break
             else:
                 AI_won("AI acomplished the objective")
+                break
         if not game_logic.there_are_possible_moves(current_turn):
             if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
                 if game_logic.is_AI_turn():

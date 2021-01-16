@@ -3,6 +3,7 @@ from enum import Enum
 import copy
 from game_logic import ai_logic
 
+
 class PosTypes(Enum):
     EMPTY = 0,
     AI = 1,
@@ -33,6 +34,7 @@ def init_game_logic(options):
     current_turn = PosTypes.HUMAN
     init_board()
     pass
+
 
 
 def init_board():
@@ -205,24 +207,3 @@ def is_occupied(line, column):
 
     return True
 
-
-def default_winning_method():
-    # True - HUMAN wins
-    # False - AI wins
-    # None - Nobody won
-    height = settings["board_height"]
-    width = settings["board_width"]
-    number_of_pieces = settings["number_of_pieces"]
-    piece_count = 0
-    for i in range(width):
-        if board[0][i] == 2:
-            piece_count += 1
-    if number_of_pieces == piece_count:
-        return True
-    piece_count = 0
-    for i in range(width):
-        if board[height - 1][i] == 1:
-            piece_count += 1
-    if number_of_pieces == piece_count:
-        return False
-    return None

@@ -1,5 +1,6 @@
 from idlelib.idle_test.test_colorizer import source
-
+from game_logic import game_logic
+from controller import main_controller
 '''
 Verifying the integrity of the input code
 '''
@@ -78,6 +79,8 @@ def test_valid_return_winning_method():
 
 
 def test_valid_code_score_method():
+    game_logic.init_game_logic(main_controller.settings)
+    game_logic.init_board()
     try:
         a = score_function()
     except Exception as e:
@@ -89,6 +92,8 @@ def test_valid_code_score_method():
 
 
 def test_valid_code_winning_method():
+    game_logic.init_game_logic(options)
+    game_logic.init_board()
     try:
         a = winning_function()
     except Exception as e:

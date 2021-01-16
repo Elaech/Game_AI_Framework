@@ -4,6 +4,10 @@ from idlelib.idle_test.test_colorizer import source
 Verifying the integrity of the input code
 '''
 
+score_function = None
+winning_function = None
+
+
 def check_winning_method(string=None):
     try:
         if not string:
@@ -13,7 +17,8 @@ def check_winning_method(string=None):
             exec(string, globals())
     except:
         return False
-    print(winning_method())
+    winning_function = winning_method
+    print(winning_function())
     # if not test_valid_code_winning_method():
     #     return False
     # if not test_valid_return_winning_method():
@@ -31,7 +36,8 @@ def check_score_method(string=None):
             exec(string, globals())
     except:
         return False
-    print(score_method())
+    score_function = score_method
+    print(score_function())
     # if not test_valid_code_score_method():
     #     return False
     # if not test_valid_return_score_method():
@@ -50,7 +56,7 @@ def test_magic2():
 
 
 def test_valid_return_score_method():
-    return_value = score_method()
+    return_value = score_function()
     print(return_value)
     if type(return_value) == float or type(return_value) == int:
         return True
@@ -59,7 +65,7 @@ def test_valid_return_score_method():
 
 
 def test_valid_return_winning_method():
-    return_value = score_method()
+    return_value = score_function()
     if type(return_value) == bool:
         return True
 
@@ -69,7 +75,7 @@ def test_valid_return_winning_method():
 # not tested
 def test_valid_code_score_method():
     try:
-        print(score_method())
+        print(winning_function())
     except:
         return False
 
@@ -79,7 +85,7 @@ def test_valid_code_score_method():
 # not tested
 def test_valid_code_winning_method():
     try:
-        print(winning_method())
+        print(winning_function())
     except:
         return False
 

@@ -154,7 +154,6 @@ def modify_simple_moves(settings):
                                 updated_simple_moves.append([index_j, index_i])
                     settings["simple_moves"] = normalize_possible_moves([local_height // 2, local_width // 2],
                                                                         updated_simple_moves)
-                    print(settings["simple_moves"])
                     local_quit = True
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
                 if x != -1 and y != -1:

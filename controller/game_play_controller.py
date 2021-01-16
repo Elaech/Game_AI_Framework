@@ -1,6 +1,7 @@
 from controller import main_controller
 from game_logic import main_logic
 from game_logic import game_logic
+from game_logic import ai_logic
 import pygame
 from game_graphics import play_game_graphics
 
@@ -27,6 +28,7 @@ def start(settings):
         play_game_graphics.color_blocked_cell(position[0], position[1])
     current_turn = game_logic.get_current_turn()
     game_logic.init_functions()
+    ai_logic.init_ai_logic(settings, game_logic.score_function, game_logic.winning_function)
     playing_game = True
     while playing_game:
         if game_logic.somebody_won() is not None:
@@ -150,6 +152,6 @@ def won(message):
 
 def AI_turn():
     game_logic.print_board_to_console()
-    print("AI TURN")
+    ai_logic.get_next_move()
     game_logic.print_board_to_console()
     game_logic.charge_up_turn()

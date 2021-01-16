@@ -1,17 +1,23 @@
-
 import math
 from game_logic import game_logic
 
 settings = None
+score_heuristic = None
+win_heuristic = None
 
 
-def init_ai_logic(options):
+def init_ai_logic(options, score_method, winning_method):
     global settings
+    global score_heuristic
+    global win_heuristic
     settings = options
+    score_heuristic = score_method
+    win_heuristic = winning_method
 
 
 def get_next_move():
-    pass
+    print(win_heuristic())
+    print(score_heuristic())
 
 
 def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):

@@ -102,6 +102,10 @@ def change_turn():
         current_turn = PosTypes.HUMAN
 
 
+def get_current_turn():
+    return current_turn
+
+
 def charge_up_turn():
     global turn_charge
     turn_charge += 1

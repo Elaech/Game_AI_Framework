@@ -171,8 +171,7 @@ def make_move(initial_line, initial_column, after_line, after_column):
                     board[after_line][after_column] = board[initial_line][initial_column]
                     board[initial_line][initial_column] = PosTypes.EMPTY
                     charge_up_turn()
-                    return True
-    return False
+              
 
 
 def is_my_piece(player_type, line, column):

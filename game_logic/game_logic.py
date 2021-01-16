@@ -49,7 +49,7 @@ def init_board():
     for index in range(start_pos, start_pos + nr_pieces):
         human_line[index] = PosTypes.HUMAN
     board.append(ai_line)
-    for index in range(board_width - 2):
+    for index in range(settings["board_height"] - 2):
         board.append(copy.deepcopy(empty_line))
     board.append(human_line)
 

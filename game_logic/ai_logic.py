@@ -1,5 +1,5 @@
-import main_logic
-import game_logic
+from game_logic import main_logic
+from game_logic import game_logic
 
 settings = None
 

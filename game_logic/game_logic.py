@@ -1,7 +1,7 @@
 from game_logic import main_logic
 from enum import Enum
 import copy
-
+from game_logic import ai_logic
 
 class PosTypes(Enum):
     EMPTY = 0,

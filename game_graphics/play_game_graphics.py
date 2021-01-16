@@ -80,8 +80,9 @@ def clear_cell(x, y):
 
 
 def draw_selected_piece(x, y):
-    clear_cell(x, y)
     pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+                       ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
+    pygame.draw.circle(mg.window, mg.color_scheme["AI_piece_color"],
                        ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 5)
 
 

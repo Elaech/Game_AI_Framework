@@ -139,13 +139,19 @@ def legal_move(initial_line, initial_column, after_line, after_column):
         if board[initial_line][initial_column] == PosTypes.HUMAN:
             if is_pos_within_bounds(after_line, after_column):
                 if board[after_line][after_column] == PosTypes.EMPTY:
-                    return True
+                    for move in settings["simple_moves"]:
+                        if initial_line + move[0] == after_line:
+                            if initial_column + move[1] == after_column:
+                                return True
 
     if is_AI_turn():
         if board[initial_line][initial_column] == PosTypes.AI:
             if is_pos_within_bounds(after_line, after_column):
                 if board[after_line][after_column] == PosTypes.EMPTY:
-                    return True
+                    for move in settings["simple_moves"]:
+                        if initial_line - move[0] == after_line:
+                            if initial_column - move[1] == after_column:
+                                return True
 
     return False
 

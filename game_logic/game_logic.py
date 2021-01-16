@@ -139,16 +139,28 @@ def legal_move(initial_line, initial_column, after_line, after_column):
 
 
 def there_are_possible_moves(player_type):
-    return True
+    for i in range(0, settings.board_height):
+        for j in range(0, settings.board_width):
+            if board[i][j] == player_type:
+                for move in settings.simple_moves:
+                    t = 1
+                    if player_type == PosTypes.AI:
+                        t = -1
+                    if legal_move(i, j, i + move[0] * t, j + move[1] * t):
+                        return True
+
+    return False
 
 
 def make_move(initial_line, initial_column, after_line, after_column):
-    if is_pos_within_bounds(initial_line,initial_column):
-        if is_pos_within_bounds(after_line,after_column):
-            if board[initial_line][initial_column] == PosTypes.HUMAN or board[initial_line][initial_column] == PosTypes.AI:
+    if is_pos_within_bounds(initial_line, initial_column):
+        if is_pos_within_bounds(after_line, after_column):
+            if board[initial_line][initial_column] == PosTypes.HUMAN or \
+                    board[initial_line][initial_column] == PosTypes.AI:
                 if board[after_line][after_column] == PosTypes.EMPTY:
                     board[after_line][after_column] = board[initial_line][initial_column]
-                    board[initial_line][initial_column]= PosTypes.EMPTY
+                    board[initial_line][initial_column] = PosTypes.EMPTY
+                    charge_up_turn()
                     return True
 
     return False

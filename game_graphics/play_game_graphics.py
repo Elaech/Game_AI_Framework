@@ -1,10 +1,7 @@
 import pygame
 from game_graphics import main_graphics as mg
 
-pad = None
 cell_dim = None
-height_offset = None
-width_offset = None
 board_width = None
 board_height = None
 board_pixel_width = None
@@ -12,14 +9,12 @@ board_pixel_height = None
 
 
 def init_game_graphics():
-    global pad
-    global cell_dim
-    global height_offset
-    global width_offset
     global board_height
     global board_width
     global board_pixel_height
     global board_pixel_width
+    global cell_dim
+    cell_dim = min(board_pixel_height / board_height, board_pixel_width / board_width)
     board_width = mg.settings["board_width"]
     board_height = mg.settings["board_height"]
     board_pixel_width = mg.settings["screen_width"] * 17 / 20
@@ -37,16 +32,54 @@ def is_back_button_pressed(mouse):
         return False
 
 
+def get_board_click(mouse):
+    x = mouse[0]
+    y = mouse[1]
+    found_x = -1
+    found_y = -1
+    for i in range(0, board_width):
+        if i * cell_dim <= x < (i + 1) * cell_dim:
+            found_x = i
+            break
+    for i in range(0, board_height):
+        if i * cell_dim <= y < (i + 1) * cell_dim:
+            found_y = i
+            break
+    return found_x, found_y
+
+
+def draw_player_piece(x, y, piece_type):
+    if piece_type:
+        pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+                           ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
+    else:
+        pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+                           ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
+    pygame.display.update()
+
+
+def clear_cell(x, y):
+    mg.window.fill(mg.color_scheme["background_color"],
+                   (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
+    pygame.display.update()
+
+
+def color_blocked_cell(x, y):
+    mg.window.fill(mg.color_scheme["board_cell_selection_color"],
+                   (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
+    pygame.display.update()
+
+
+def color_hover_cell(x, y):
+    mg.window.fill(mg.color_scheme["board_hover_color"],
+                   (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
+    pygame.display.update()
+
+
 def draw_play_board():
-    global board_pixel_height
-    global board_pixel_width
-    global cell_dim
     mg.window.fill(mg.color_scheme["background_color"])
-    board_pixel_width = mg.width * 17 / 20
-    board_pixel_height = mg.height
-    board_columns = mg.settings["board_width"]
-    board_rows = mg.settings["board_height"]
-    cell_dim = min(board_pixel_height/board_rows, board_pixel_width/board_columns)
+    board_columns = board_width
+    board_rows = board_height
     for i in range(1, board_columns):
         pygame.draw.line(mg.window, mg.color_scheme["text_color"],
                          (cell_dim * i, 1),

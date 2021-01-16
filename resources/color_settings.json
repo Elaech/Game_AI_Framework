@@ -6,5 +6,6 @@
   "line_color":"00001d",
   "board_cell_selection_color":"#992040",
   "human_player_piece_color":"#2F4F4F",
-  "AI_piece_color":"#A52A2A"
+  "AI_piece_color":"#A52A2A",
+  "board_hover_color":"#13bec4"
 }

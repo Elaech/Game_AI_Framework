@@ -4,21 +4,38 @@ from idlelib.idle_test.test_colorizer import source
 Verifying the integrity of the input code
 '''
 
-
-def check_winning_method():
-    if not test_valid_code_winning_method():
+def check_winning_method(string=None):
+    try:
+        if not string:
+            with open("../game_logic/winning_method.py", "r") as o:
+                exec(o.read(), globals())
+        else:
+            exec(string, globals())
+    except:
         return False
-    if not test_valid_return_winning_method():
-        return False
+    print(winning_method())
+    # if not test_valid_code_winning_method():
+    #     return False
+    # if not test_valid_return_winning_method():
+    #     return False
 
     return True
 
 
-def check_score_method():
-    if not test_valid_code_score_method():
+def check_score_method(string=None):
+    try:
+        if not string:
+            with open("../game_logic/score_method.py", "r") as o:
+                exec(o.read(), globals())
+        else:
+            exec(string, globals())
+    except:
         return False
-    if not test_valid_return_score_method():
-        return False
+    print(score_method())
+    # if not test_valid_code_score_method():
+    #     return False
+    # if not test_valid_return_score_method():
+    #     return False
 
     return True
 
@@ -29,13 +46,12 @@ def test_magic():
 
 
 def test_magic2():
-    from game_logic import score_method
-    print(score_method.score_method())
+    print(score_method())
 
 
 def test_valid_return_score_method():
-    from game_logic import score_method
-    return_value = score_method.score_method()
+    return_value = score_method()
+    print(return_value)
     if type(return_value) == float or type(return_value) == int:
         return True
 
@@ -43,8 +59,7 @@ def test_valid_return_score_method():
 
 
 def test_valid_return_winning_method():
-    from game_logic import score_method
-    return_value = score_method.score_method()
+    return_value = score_method()
     if type(return_value) == bool:
         return True
 
@@ -53,9 +68,8 @@ def test_valid_return_winning_method():
 
 # not tested
 def test_valid_code_score_method():
-    from game_logic import score_method
     try:
-        print(score_method.score_method())
+        print(score_method())
     except:
         return False
 
@@ -64,9 +78,8 @@ def test_valid_code_score_method():
 
 # not tested
 def test_valid_code_winning_method():
-    from game_logic import winning_method
     try:
-        print(winning_method.winning_method())
+        print(winning_method())
     except:
         return False
 

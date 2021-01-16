@@ -123,12 +123,8 @@ def normalize_possible_moves(center_point, move_spaces):
 def modify_simple_moves(settings):
     clock = pygame.time.Clock()
     saved_settings = copy.deepcopy(settings)
-    local_width = int(settings["board_width"] * 1.5)
-    local_height = int(settings["board_height"] * 1.5)
-    if local_width % 2 == 0:
-        local_width += 1
-    if local_height % 2 == 0:
-        local_height += 1
+    local_width = int(settings["board_width"] * 2.0) - 1
+    local_height = int(settings["board_height"] * 2.0) - 1
     settings["board_width"] = local_width
     settings["board_height"] = local_height
     main_controller.update_settings(settings)
@@ -136,7 +132,6 @@ def modify_simple_moves(settings):
     board = numpy.full((local_width, local_height), False, dtype=bool)
 
     for el in settings["simple_moves"]:
-        print(el)
         if 0 <= el[0] + (local_width // 2) < local_width \
                 and 0 <= el[1] + (local_height // 2) < local_height:
             settings_menu_graphics.color_select_space(el[0] + local_width // 2, el[1] + local_height // 2, True)
@@ -172,7 +167,7 @@ def modify_winning_condition(settings):
     with open("../game_logic/winning_method.py", "r") as win_method_file:
         method = win_method_file.read()
     code_text_interface("Change Winning Method", method)
-    if main_logic.check_score_method(input_text):
+    if main_logic.check_winning_method(input_text):
         with open("../game_logic/winning_method.py", "w") as win_method_file:
             win_method_file.write(input_text)
     return settings
@@ -194,7 +189,7 @@ def modify_nr_of_pieces(settings):
     number_text_interface("Change Number of Pieces")
     try:
         number = int(input_text)
-        if min(settings["board_width"], settings["board_height"]) < number or number < 1:
+        if settings["board_width"] < number or number < 1:
             return settings
         settings["number_of_pieces"] = number
     except Exception:

@@ -122,7 +122,8 @@ def normalize_possible_moves(center_point, move_spaces):
 
 def modify_simple_moves(settings):
     clock = pygame.time.Clock()
-    saved_settings = copy.deepcopy(settings)
+    saved_width = copy.copy(settings["board_width"])
+    saved_height = copy.copy(settings["board_height"])
     local_width = int(settings["board_width"] * 2.0) - 1
     local_height = int(settings["board_height"] * 2.0) - 1
     settings["board_width"] = local_width
@@ -150,7 +151,7 @@ def modify_simple_moves(settings):
                         for index_j in range(len(board[0])):
                             if board[index_i][index_j]:
                                 updated_simple_moves.append([index_i, index_j])
-                    saved_settings["simple_moves"] = normalize_possible_moves([local_width // 2, local_height // 2],
+                    settings["simple_moves"] = normalize_possible_moves([local_width // 2, local_height // 2],
                                                                               updated_simple_moves)
                     local_quit = True
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
@@ -159,7 +160,11 @@ def modify_simple_moves(settings):
                     settings_menu_graphics.color_select_space(x, y, board[x][y])
                     if x == local_width // 2 and y == local_height // 2:
                         settings_menu_graphics.draw_player_piece(local_width // 2, local_height // 2, True)
-    return saved_settings
+    pygame.quit()
+    settings["board_width"] = saved_width
+    settings["board_height"] = saved_height
+    main_controller.update_settings(settings)
+    return settings
 
 
 def modify_winning_condition(settings):

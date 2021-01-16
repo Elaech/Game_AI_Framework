@@ -98,12 +98,20 @@ def is_HUMAN_turn():
 
 def change_turn():
     global current_turn
+    global turn_charge
+    turn_charge = 0
     if is_AI_turn():
         current_turn = PosTypes.HUMAN
 
 
 def get_current_turn():
     return current_turn
+
+
+def get_other_turn():
+    if is_AI_turn():
+        return PosTypes.HUMAN
+    return PosTypes.AI
 
 
 def charge_up_turn():
@@ -113,6 +121,8 @@ def charge_up_turn():
         turn_charge = 0
         change_turn()
 
+def somebody_won():
+    return default_winning_method()
 
 def is_pos_within_bounds(line, column):
     if column > settings.board_width or column < 0:
@@ -162,7 +172,6 @@ def make_move(initial_line, initial_column, after_line, after_column):
                     board[initial_line][initial_column] = PosTypes.EMPTY
                     charge_up_turn()
                     return True
-
     return False
 
 

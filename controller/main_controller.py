@@ -76,7 +76,6 @@ def update_settings(options):
     global settings
     settings = options
 
-
 if __name__ == '__main__':
     init_settings()
     init_application_window()

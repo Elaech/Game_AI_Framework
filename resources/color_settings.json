@@ -4,5 +4,7 @@
   "text_color":"#d0dbce",
   "button_border":"#0d0d0d",
   "line_color":"00001d",
-  "board_cell_selection_color":"#992040"
+  "board_cell_selection_color":"#992040",
+  "human_player_piece_color":"#2F4F4F",
+  "AI_piece_color":"#A52A2A"
 }

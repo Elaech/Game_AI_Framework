@@ -143,6 +143,16 @@ def color_select_space(x, y, color_type):
     pygame.display.update()
 
 
+def draw_player_piece(x, y, piece_type):
+    cell_dim = min(mg.height / mg.settings["board_height"], mg.width / mg.settings["board_width"])
+    if piece_type:
+        pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+                           ((x+0.5)*cell_dim, (y+0.5)*cell_dim), cell_dim / 2)
+    else:
+        pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+                           ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 2)
+    pygame.display.update()
+
 def draw_move_board():
     mg.window.fill(mg.color_scheme["background_color"])
     board_pixel_width = mg.width

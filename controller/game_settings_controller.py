@@ -116,7 +116,7 @@ def normalize_possible_moves(center_point, move_spaces):
     for point in move_spaces:
         normalized_x = point[0] - center_point[0]
         normalized_y = point[1] - center_point[1]
-        normalized_moves.append((normalized_x, normalized_y))
+        normalized_moves.append([normalized_x, normalized_y])
     return normalized_moves
 
 
@@ -134,7 +134,14 @@ def modify_simple_moves(settings):
     main_controller.update_settings(settings)
     settings_menu_graphics.draw_move_board()
     board = numpy.full((local_width, local_height), False, dtype=bool)
-    settings_menu_graphics.draw_player_piece(local_height // 2, local_width // 2, True)
+
+    for el in settings["simple_moves"]:
+        print(el)
+        if 0 <= el[0] + (local_width // 2) < local_width \
+                and 0 <= el[1] + (local_height // 2) < local_height:
+            settings_menu_graphics.color_select_space(el[0] + local_width // 2, el[1] + local_height // 2, True)
+            board[el[0] + local_width // 2][el[1] + local_height // 2] = True
+    settings_menu_graphics.draw_player_piece(local_width // 2, local_height // 2, True)
     local_quit = False
     while not local_quit:
         clock.tick(60)
@@ -143,16 +150,20 @@ def modify_simple_moves(settings):
                 local_quit = True
             elif event.type == pygame.MOUSEBUTTONUP:
                 if settings_menu_graphics.is_back_button_pressed(pygame.mouse.get_pos()):
-                    updated_blocked = []
+                    updated_simple_moves = []
                     for index_i in range(len(board)):
                         for index_j in range(len(board[0])):
                             if board[index_i][index_j]:
-                                updated_blocked.append([index_i, index_j])
+                                updated_simple_moves.append([index_i, index_j])
+                    saved_settings["simple_moves"] = normalize_possible_moves([local_width // 2, local_height // 2],
+                                                                              updated_simple_moves)
                     local_quit = True
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
                 if x != -1 and y != -1:
                     board[x][y] = (not board[x][y])
                     settings_menu_graphics.color_select_space(x, y, board[x][y])
+                    if x == local_width // 2 and y == local_height // 2:
+                        settings_menu_graphics.draw_player_piece(local_width // 2, local_height // 2, True)
     return saved_settings
 
 

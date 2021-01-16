@@ -125,9 +125,9 @@ def somebody_won():
     return default_winning_method()
 
 def is_pos_within_bounds(line, column):
-    if column > settings.board_width or column < 0:
+    if column > settings["board_width"] or column < 0:
         return False
-    if line > settings.board_height or line < 0:
+    if line > settings["board_height"] or line < 0:
         return False
     return True
 
@@ -149,10 +149,10 @@ def legal_move(initial_line, initial_column, after_line, after_column):
 
 
 def there_are_possible_moves(player_type):
-    for i in range(0, settings.board_height):
-        for j in range(0, settings.board_width):
+    for i in range(0, settings["board_height"]):
+        for j in range(0, settings["board_width"]):
             if board[i][j] == player_type:
-                for move in settings.simple_moves:
+                for move in settings["simple_moves"]:
                     t = 1
                     if player_type == PosTypes.AI:
                         t = -1
@@ -171,7 +171,7 @@ def make_move(initial_line, initial_column, after_line, after_column):
                     board[after_line][after_column] = board[initial_line][initial_column]
                     board[initial_line][initial_column] = PosTypes.EMPTY
                     charge_up_turn()
-              
+
 
 
 def is_my_piece(player_type, line, column):

@@ -17,4 +17,5 @@ def winning_method():
             piece_count += 1
     if number_of_pieces == piece_count:
         return False
-    return None
+    return True
+

@@ -52,6 +52,10 @@ def clicked_on_moves_per_turn(mouse):
     return settings_menu_graphics.is_moves_per_turn_button_pressed(mouse)
 
 
+def clicked_on_nr_of_pieces(mouse):
+    return settings_menu_graphics.is_number_of_pieces_button_pressed(mouse)
+
+
 def get_callable(mouse):
     if clicked_on_back(mouse):
         return -1
@@ -71,6 +75,8 @@ def get_callable(mouse):
         return modify_board_width
     elif clicked_on_moves_per_turn(mouse):
         return modify_moves_per_turn
+    elif clicked_on_nr_of_pieces(mouse):
+        return modify_nr_of_pieces
     return None
 
 
@@ -94,7 +100,7 @@ def modify_board(settings):
                     for index_i in range(len(board)):
                         for index_j in range(len(board[0])):
                             if board[index_i][index_j]:
-                                updated_blocked.append([index_i,index_j])
+                                updated_blocked.append([index_i, index_j])
                     settings["board_blocks"] = updated_blocked
                     return settings
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
@@ -130,9 +136,22 @@ def modify_score_method(settings):
     return settings
 
 
+def modify_nr_of_pieces(settings):
+    pygame.quit()
+    number_text_interface("Change Number of Pieces")
+    try:
+        number = int(input_text)
+        if min(settings["board_width"], settings["board_height"]) < number or number < 1:
+            return settings
+        settings["number_of_pieces"] = number
+    except Exception:
+        pass
+    return settings
+
+
 def modify_moves_per_turn(settings):
     pygame.quit()
-    number_text_interface("Change Board Width")
+    number_text_interface("Change Moves per Turn")
     try:
         number = int(input_text)
         if number < 1:

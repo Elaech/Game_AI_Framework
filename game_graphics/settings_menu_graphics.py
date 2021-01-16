@@ -60,6 +60,17 @@ def is_moves_per_turn_button_pressed(mouse):
         return False
 
 
+def is_number_of_pieces_button_pressed(mouse):
+    x = mouse[0]
+    y = mouse[1]
+    width_proportion = mg.width / 20
+    height_proportion = mg.height / 20
+    if width_proportion * 2 < x < width_proportion * 6 and height_proportion * 15 < y < height_proportion * 17:
+        return True
+    else:
+        return False
+
+
 def is_define_moves_button_pressed(mouse):
     x = mouse[0]
     y = mouse[1]
@@ -175,6 +186,8 @@ def draw_settings_menu():
     mg.draw_button(width_proportion * 2, height_proportion * 12,
                    width_proportion * 4, height_proportion * 2,
                    "Moves per turn : " + str(mg.settings["moves_per_turn"]))
+    mg.draw_button(width_proportion * 2, height_proportion * 15,
+                   width_proportion * 4, height_proportion * 2, "No. of pieces: " + str(mg.settings["number_of_pieces"]))
     mg.draw_button(width_proportion * 12, height_proportion * 3,
                    width_proportion * 6, height_proportion * 2, "Define Moves")
     mg.draw_button(width_proportion * 12, height_proportion * 6,

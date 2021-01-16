@@ -7,5 +7,6 @@
   "simple_moves": [[-1,-1],[0,-1],[1,-1]],
   "board_blocks": [],
   "alfa-beta": true,
-  "moves_per_turn": 1
+  "moves_per_turn": 1,
+  "number_of_pieces": 5
 }

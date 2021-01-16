@@ -12,6 +12,9 @@ class PosTypes(Enum):
 
 settings = None
 board = None
+current_turn = None
+turn_charge = None
+max_turn_charge = None
 
 
 def update_settings(options):
@@ -20,8 +23,14 @@ def update_settings(options):
 
 
 def init_game_logic(options):
+    global turn_charge
+    global max_turn_charge
     global settings
+    global current_turn
     settings = options
+    max_turn_charge = settings["moves_per_turn"]
+    turn_charge = 0
+    current_turn = PosTypes.HUMAN
     init_board()
     pass
 
@@ -50,7 +59,6 @@ def init_blocked_positions():
     positions = settings["board_blocks"]
     for pos in positions:
         board[pos[1]][pos[0]] = PosTypes.BLOCKED
-    print_board_to_console()
 
 
 def get_ai_pieces():
@@ -71,6 +79,59 @@ def get_human_pieces():
     return human_positions
 
 
+def get_board():
+    return board
+
+
 def print_board_to_console():
     for line in board:
         print(line)
+
+
+def is_AI_turn():
+    return current_turn == PosTypes.AI
+
+
+def is_HUMAN_turn():
+    return current_turn == PosTypes.HUMAN
+
+
+def change_turn():
+    global current_turn
+    if is_AI_turn():
+        current_turn = PosTypes.HUMAN
+
+
+def charge_up_turn():
+    global turn_charge
+    turn_charge += 1
+    if turn_charge == max_turn_charge:
+        turn_charge = 0
+        change_turn()
+
+
+def is_pos_within_bounds(line, column):
+    return True
+
+
+def legal_move(initial_line, initial_column, after_line, after_column):
+    return true
+
+
+def there_are_possible_moves(turn):
+    return True
+
+
+def make_move(initial_line, initial_column, after_line, after_column):
+    pass
+
+
+def is_my_piece(player_type, line, column):
+    return True
+
+
+def default_winning_method():
+    # True - HUMAN wins
+    # False - AI wins
+    # None - Nobody won
+    return None

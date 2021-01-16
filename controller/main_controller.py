@@ -45,8 +45,14 @@ def quit(settings):
 
 def init_settings():
     global settings
-    with open("../resources/settings.json") as settings_file:
+    with open("../resources/settings.json", "r") as settings_file:
         settings = json.load(settings_file)
+    with open("../game_logic/default_score_method.py", "r") as def_score_file:
+        with open("../game_logic/score_method.py", "w") as score_file:
+            score_file.write(def_score_file.read())
+    with open("../game_logic/default_winning_method.py", "r") as def_score_file:
+        with open("../game_logic/winning_method.py", "w") as score_file:
+            score_file.write(def_score_file.read())
 
 
 def init_application_window():

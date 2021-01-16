@@ -20,8 +20,8 @@ def init_graphics(screen, options):
     settings = options
     height = settings["screen_height"]
     width = settings["screen_width"]
-    button_text_size = 16
-    font = pygame.freetype.SysFont("Arial", 20)
+    button_text_size = 18
+    font = pygame.freetype.SysFont("Arial", button_text_size)
     window = screen
     init_colors()
 
@@ -40,5 +40,16 @@ Draw button made by Pristavu Dumitru-Dragos
 def draw_button(x, y, button_width, button_height, button_text):
     window.fill(color_scheme["button_border"], (x, y, button_width, button_height))
     window.fill(color_scheme["button_color"], (x + 5, y + 5, button_width - 10, button_height - 10))
-    font.render_to(window, (x + button_width / 2 - len(button_text) * 4, y + button_height / 2 - 5),
+    text_rect = font.get_rect(button_text, size=button_text_size)
+    text_rect.center = (x + button_width / 2, y + button_height / 2)
+
+    font.render_to(window, text_rect,
                    button_text, color_scheme["text_color"])
+
+
+def draw_custom_font_button(x, y, button_width, button_height, button_text, custom_font, font_size):
+    window.fill(color_scheme["button_color"], (x + 5, y + 5, button_width - 10, button_height - 10))
+    text_rect = custom_font.get_rect(button_text, size=font_size)
+    text_rect.center = (x + button_width / 2, y + button_height / 2)
+    custom_font.render_to(window, text_rect,
+                          button_text, color_scheme["text_color"])

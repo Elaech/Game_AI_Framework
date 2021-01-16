@@ -1,4 +1,5 @@
 import pygame
+import pygame.freetype
 from game_graphics import main_graphics as mg
 
 cell_dim = None
@@ -32,6 +33,20 @@ def is_back_button_pressed(mouse):
         return False
 
 
+def game_finish_prompt(human_won, text):
+    winner = ""
+    if human_won:
+        winner = "Human"
+    else:
+        winner = "AI"
+    font = pygame.freetype.SysFont("Arial", 14)
+    mg.draw_button(board_pixel_width * 4 / 10, board_pixel_height * 3 / 10,
+                   board_pixel_width * 2 / 10, board_pixel_height / 10, winner + " Won!")
+    mg.draw_custom_font_button(board_pixel_width * 1 / 10, board_pixel_height * 4 / 10,
+                   board_pixel_width * 8 / 10, board_pixel_height / 10, text, font, 14)
+    pygame.display.update()
+
+
 def get_board_click(mouse):
     x = mouse[0]
     y = mouse[1]
@@ -62,6 +77,12 @@ def clear_cell(x, y):
     mg.window.fill(mg.color_scheme["background_color"],
                    (x * cell_dim + 5, y * cell_dim + 5, cell_dim - 10, cell_dim - 10))
     pygame.display.update()
+
+
+def draw_selected_piece(x, y):
+    clear_cell(x, y)
+    pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+                       ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 5)
 
 
 def color_blocked_cell(x, y):
@@ -99,3 +120,4 @@ def draw_play_board():
     mg.draw_button(mg.width * 17 / 20, mg.height * 17 / 20,
                    mg.width * 2 / 20, mg.height * 2 / 20, "Back")
     pygame.display.update()
+    

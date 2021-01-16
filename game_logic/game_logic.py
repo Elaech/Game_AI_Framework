@@ -102,6 +102,8 @@ def change_turn():
     turn_charge = 0
     if is_AI_turn():
         current_turn = PosTypes.HUMAN
+    else:
+        current_turn = PosTypes.AI
 
 
 def get_current_turn():
@@ -187,6 +189,8 @@ def make_move(initial_line, initial_column, after_line, after_column):
         board[after_line][after_column] = board[initial_line][initial_column]
         board[initial_line][initial_column] = PosTypes.EMPTY
         charge_up_turn()
+    print_board_to_console()
+
 
 def is_my_piece(player_type, line, column):
     if player_type == board[line][column]:

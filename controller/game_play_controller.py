@@ -28,21 +28,21 @@ def start(settings):
     current_turn = game_logic.get_current_turn()
     playing_game = True
     while playing_game:
-        # if game_logic.somebody_won() is not None:
-        #     if game_logic.somebody_won() is True:
-        #         HUMAN_won("HUMAN acomplished the objective")
-        #     else:
-        #         AI_won("AI acomplished the objective")
-        # if not game_logic.there_are_possible_moves(current_turn):
-        #     if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
-        #         if game_logic.is_AI_turn():
-        #             HUMAN_won("AI player has no moves")
-        #         else:
-        #             AI_won("Human player has no moves")
-        #         playing_game = False
-        #         continue
-        #     else:
-        #         game_logic.change_turn()
+        if game_logic.somebody_won() is not None:
+            if game_logic.somebody_won() is True:
+                HUMAN_won("HUMAN acomplished the objective")
+            else:
+                AI_won("AI acomplished the objective")
+        if not game_logic.there_are_possible_moves(current_turn):
+            if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
+                if game_logic.is_AI_turn():
+                    HUMAN_won("AI player has no moves")
+                else:
+                    AI_won("Human player has no moves")
+                playing_game = False
+                continue
+            else:
+                game_logic.change_turn()
         if game_logic.is_AI_turn():
             AI_turn()
         else:
@@ -71,11 +71,11 @@ def calibrate_piece_settings(settings):
 def draw_hover(line, column, changes):
     hovers = []
     for change in changes:
-        if game_logic.is_pos_within_bounds(column + change[1], line + change[0]) and not game_logic.is_occupied(
-                column + change[1], line + change[0]):
-            play_game_graphics.color_hover_cell(line + change[0], column + change[1])
-            hovers.append([line + change[0], column + change[1]])
-        elif game_logic.is_pos_within_bounds(column + change[1], line + change[0]) and change[1] == 0 \
+        if game_logic.is_pos_within_bounds(column + change[0], line + change[1]) and not game_logic.is_occupied(
+                column + change[0], line + change[1]):
+            play_game_graphics.color_hover_cell(line + change[1], column + change[0])
+            hovers.append([line + change[1], column + change[0]])
+        elif game_logic.is_pos_within_bounds(column + change[0], line + change[1]) and change[1] == 0 \
                 and change[0] == 0:
             play_game_graphics.color_hover_cell(line, column)
             play_game_graphics.draw_player_piece(line, column, True)
@@ -115,8 +115,8 @@ def HUMAN_turn(settings):
                     elif game_logic.is_my_piece(game_logic.PosTypes.EMPTY, column, line) and selected_piece is not None:
                         if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line):
                             game_logic.make_move(selected_piece[1], selected_piece[0], column, line)
-                            play_game_graphics.clear_cell(selected_piece[0], selected_piece[1])
                             delete_hover(last_hover, selected_piece)
+                            play_game_graphics.clear_cell(selected_piece[0], selected_piece[1])
                             play_game_graphics.draw_player_piece(line, column, True)
                             return False
 
@@ -130,4 +130,5 @@ def HUMAN_won(message):
 
 
 def AI_turn():
-    pass
+    print("AI TURN")
+    game_logic.charge_up_turn()

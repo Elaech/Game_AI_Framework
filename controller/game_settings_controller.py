@@ -133,10 +133,10 @@ def modify_simple_moves(settings):
     board = numpy.full((local_width, local_height), False, dtype=bool)
 
     for el in settings["simple_moves"]:
-        if 0 <= el[0] + (local_width // 2) < local_width \
-                and 0 <= el[1] + (local_height // 2) < local_height:
-            settings_menu_graphics.color_select_space(el[0] + local_width // 2, el[1] + local_height // 2, True)
-            board[el[0] + local_width // 2][el[1] + local_height // 2] = True
+        if 0 <= el[1] + (local_width // 2) < local_width \
+                and 0 <= el[0] + (local_height // 2) < local_height:
+            settings_menu_graphics.color_select_space(el[1] + local_width // 2, el[0] + local_height // 2, True)
+            board[el[1] + local_width // 2][el[0] + local_height // 2] = True
     settings_menu_graphics.draw_player_piece(local_width // 2, local_height // 2, True)
     local_quit = False
     while not local_quit:
@@ -150,9 +150,9 @@ def modify_simple_moves(settings):
                     for index_i in range(len(board)):
                         for index_j in range(len(board[0])):
                             if board[index_i][index_j]:
-                                updated_simple_moves.append([index_i, index_j])
+                                updated_simple_moves.append([index_j, index_i])
                     settings["simple_moves"] = normalize_possible_moves([local_width // 2, local_height // 2],
-                                                                              updated_simple_moves)
+                                                                        updated_simple_moves)
                     local_quit = True
                 x, y = settings_menu_graphics.get_board_click(pygame.mouse.get_pos())
                 if x != -1 and y != -1:

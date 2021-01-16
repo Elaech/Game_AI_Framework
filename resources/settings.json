@@ -4,7 +4,7 @@
   "screen_height": 600,
   "board_width": 5,
   "board_height": 5,
-  "simple_moves": [[-1,-1],[0,-1],[1,-1]],
+  "simple_moves": [[-1,-1],[-1,0],[-1,1]],
   "board_blocks": [],
   "alfa-beta": true,
   "moves_per_turn": 1,

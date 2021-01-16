@@ -5,6 +5,7 @@ from game_graphics import main_graphics as mg
 Made by Pristavu Dumitru-Dragos
 """
 
+
 def is_back_button_pressed(mouse):
     x = mouse[0]
     y = mouse[1]

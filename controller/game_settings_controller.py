@@ -111,6 +111,15 @@ def modify_board(settings):
     return settings
 
 
+def normalize_possible_moves(center_point, move_spaces):
+    normalized_moves = []
+    for point in move_spaces:
+        normalized_x = point[0] - center_point[0]
+        normalized_y = point[1] - center_point[1]
+        normalized_moves.append((normalized_x, normalized_y))
+    return normalized_moves
+
+
 def modify_simple_moves(settings):
     clock = pygame.time.Clock()
     saved_settings = copy.deepcopy(settings)

@@ -16,6 +16,8 @@ board = None
 current_turn = None
 turn_charge = None
 max_turn_charge = None
+winning_function = None
+score_function = None
 
 
 def update_settings(options):
@@ -35,6 +37,12 @@ def init_game_logic(options):
     init_board()
     pass
 
+
+def init_functions():
+    global score_function
+    global winning_function
+    score_function = main_logic.score_function
+    winning_function = main_logic.winning_function
 
 
 def init_board():
@@ -127,7 +135,7 @@ def charge_up_turn():
 
 
 def somebody_won():
-    return default_winning_method()
+    return winning_function()
 
 
 def is_pos_within_bounds(line, column):
@@ -191,7 +199,6 @@ def make_move(initial_line, initial_column, after_line, after_column):
         board[after_line][after_column] = board[initial_line][initial_column]
         board[initial_line][initial_column] = PosTypes.EMPTY
         charge_up_turn()
-    print_board_to_console()
 
 
 def is_my_piece(player_type, line, column):
@@ -204,6 +211,4 @@ def is_my_piece(player_type, line, column):
 def is_occupied(line, column):
     if board[line][column] == PosTypes.EMPTY:
         return False
-
     return True
-

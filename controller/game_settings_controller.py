@@ -2,6 +2,7 @@ import numpy
 import copy
 from controller import main_controller
 from game_graphics import settings_menu_graphics
+from game_logic import game_logic
 import pygame
 import tkinter
 from game_logic import main_logic
@@ -252,10 +253,14 @@ def modify_alfabeta(settings):
 
 
 def local_controller_manager(settings):
+    game_logic.init_game_logic(settings)
+    game_logic.init_board()
     local_controller = settings_loop(settings)
     while local_controller != -1:
         settings = local_controller(settings)
         main_controller.update_settings(settings)
+        game_logic.init_game_logic(settings)
+        game_logic.init_board()
         main_controller.init_application_window()
         local_controller = settings_loop(settings)
     return main_controller.call_main_menu()

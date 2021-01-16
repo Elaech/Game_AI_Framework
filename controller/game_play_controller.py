@@ -26,6 +26,7 @@ def start(settings):
     for position in settings["board_blocks"]:
         play_game_graphics.color_blocked_cell(position[0], position[1])
     current_turn = game_logic.get_current_turn()
+    game_logic.init_functions()
     playing_game = True
     while playing_game:
         if game_logic.somebody_won() is not None:
@@ -38,9 +39,9 @@ def start(settings):
         if not game_logic.there_are_possible_moves(current_turn):
             if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
                 if game_logic.is_AI_turn():
-                    HUMAN_won("AI player has no moves")
+                    won("AI player has no moves")
                 else:
-                    AI_won("Human player has no moves")
+                    won("Human player has no moves")
                 playing_game = False
                 continue
             else:
@@ -133,14 +134,12 @@ def HUMAN_turn(settings):
                             return False
 
 
-def AI_won(message):
-    pass
-
-
-def HUMAN_won(message):
-    pass
+def won(message):
+    print(message)
 
 
 def AI_turn():
+    game_logic.print_board_to_console()
     print("AI TURN")
+    game_logic.print_board_to_console()
     game_logic.charge_up_turn()

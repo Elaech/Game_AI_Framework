@@ -53,7 +53,7 @@ def draw_player_piece(x, y, piece_type):
         pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
                            ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
     else:
-        pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
+        pygame.draw.circle(mg.window, mg.color_scheme["AI_piece_color"],
                            ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
     pygame.display.update()
 

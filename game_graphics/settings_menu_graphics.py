@@ -147,11 +147,17 @@ def draw_player_piece(x, y, piece_type):
     cell_dim = min(mg.height / mg.settings["board_height"], (mg.width * 17 / 20) / mg.settings["board_width"])
     if piece_type:
         pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
-                           ((x+0.5)*cell_dim, (y+0.5)*cell_dim), cell_dim / 2)
+                           ((x+0.5)*cell_dim, (y+0.5)*cell_dim), cell_dim / 3)
     else:
         pygame.draw.circle(mg.window, mg.color_scheme["human_player_piece_color"],
-                           ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 2)
+                           ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
     pygame.display.update()
+
+
+def delete_piece(x, y):
+    cell_dim = min(mg.height / mg.settings["board_height"], (mg.width * 17 / 20) / mg.settings["board_width"])
+    pygame.draw.circle(mg.window, mg.color_scheme["background_color"],
+                       ((x + 0.5) * cell_dim, (y + 0.5) * cell_dim), cell_dim / 3)
 
 
 def draw_move_board():

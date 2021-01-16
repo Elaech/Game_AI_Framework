@@ -92,7 +92,7 @@ def test_valid_code_winning_method():
     try:
         a = winning_function()
     except Exception as e:
-        print("Win condition error: " +e)
+        print("Win condition error: " +str(e))
         return False
 
     print("Win condition: valid code")

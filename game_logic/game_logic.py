@@ -163,14 +163,9 @@ def there_are_possible_moves(player_type):
 
 
 def make_move(initial_line, initial_column, after_line, after_column):
-    if is_pos_within_bounds(initial_line, initial_column):
-        if is_pos_within_bounds(after_line, after_column):
-            if board[initial_line][initial_column] == PosTypes.HUMAN or \
-                    board[initial_line][initial_column] == PosTypes.AI:
-                if board[after_line][after_column] == PosTypes.EMPTY:
-                    board[after_line][after_column] = board[initial_line][initial_column]
-                    board[initial_line][initial_column] = PosTypes.EMPTY
-                    charge_up_turn()
+    board[after_line][after_column] = board[initial_line][initial_column]
+    board[initial_line][initial_column] = PosTypes.EMPTY
+    charge_up_turn()
 
 
 

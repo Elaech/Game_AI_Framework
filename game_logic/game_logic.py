@@ -121,8 +121,10 @@ def charge_up_turn():
         turn_charge = 0
         change_turn()
 
+
 def somebody_won():
     return default_winning_method()
+
 
 def is_pos_within_bounds(line, column):
     if column > settings["board_width"] or column < 0:
@@ -168,12 +170,18 @@ def make_move(initial_line, initial_column, after_line, after_column):
     charge_up_turn()
 
 
-
 def is_my_piece(player_type, line, column):
     if player_type == board[line][column]:
         return True
 
     return False
+
+
+def is_occupied(line, column):
+    if board[line][column] == PosTypes.EMPTY:
+        return False
+
+    return True
 
 
 def default_winning_method():

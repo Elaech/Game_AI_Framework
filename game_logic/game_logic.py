@@ -111,23 +111,50 @@ def charge_up_turn():
 
 
 def is_pos_within_bounds(line, column):
+    if column > settings.board_width or column < 0:
+        return False
+    if line > settings.board_height or line < 0:
+        return False
     return True
 
 
 def legal_move(initial_line, initial_column, after_line, after_column):
-    return true
+    if is_HUMAN_turn():
+        if board[initial_line][initial_column] == PosTypes.HUMAN:
+            if is_pos_within_bounds(after_line, after_column):
+                if board[after_line][after_column] == PosTypes.EMPTY:
+                    return True
+
+    if is_AI_turn():
+        if board[initial_line][initial_column] == PosTypes.AI:
+            if is_pos_within_bounds(after_line, after_column):
+                if board[after_line][after_column] == PosTypes.EMPTY:
+                    return True
+
+    return False
 
 
-def there_are_possible_moves(turn):
+def there_are_possible_moves(player_type):
     return True
 
 
 def make_move(initial_line, initial_column, after_line, after_column):
-    pass
+    if is_pos_within_bounds(initial_line,initial_column):
+        if is_pos_within_bounds(after_line,after_column):
+            if board[initial_line][initial_column] == PosTypes.HUMAN or board[initial_line][initial_column] == PosTypes.AI:
+                if board[after_line][after_column] == PosTypes.EMPTY:
+                    board[after_line][after_column] = board[initial_line][initial_column]
+                    board[initial_line][initial_column]= PosTypes.EMPTY
+                    return True
+
+    return False
 
 
 def is_my_piece(player_type, line, column):
-    return True
+    if player_type == board[line][column]:
+        return True
+
+    return False
 
 
 def default_winning_method():

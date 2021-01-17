@@ -42,8 +42,8 @@ def game_finish_prompt(human_won, text):
     font = pygame.freetype.SysFont("Arial", 14)
     mg.draw_button(board_pixel_width * 4 / 10, board_pixel_height * 3 / 10,
                    board_pixel_width * 2 / 10, board_pixel_height / 10, winner + " Won!")
-    mg.draw_custom_font_button(board_pixel_width * 1 / 10, board_pixel_height * 4 / 10,
-                   board_pixel_width * 8 / 10, board_pixel_height / 10, text, font, 14)
+    mg.draw_custom_font_button(board_pixel_width * 3 / 10, board_pixel_height * 4 / 10,
+                   board_pixel_width * 4 / 10, board_pixel_height / 10, text, font, 14)
     pygame.display.update()
 
 

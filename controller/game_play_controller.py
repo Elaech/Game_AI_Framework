@@ -33,19 +33,19 @@ def start(settings):
     while playing_game:
         if game_logic.somebody_won() is not None:
             if game_logic.somebody_won() is True:
-                won("HUMAN acomplished the objective")
+                won("HUMAN acomplished the objective", True)
                 break
             else:
-                won("AI acomplished the objective")
+                won("AI acomplished the objective", False)
                 break
         if not game_logic.there_are_possible_moves(current_turn):
             if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
                 if game_logic.is_AI_turn():
                     game_logic.print_board_to_console()
-                    won("AI player has no moves")
+                    won("AI player has no moves", True)
                 else:
                     game_logic.print_board_to_console()
-                    won("Human player has no moves")
+                    won("Human player has no moves", False)
                 playing_game = False
                 continue
             else:
@@ -140,9 +140,9 @@ def HUMAN_turn(settings):
                             return False
 
 
-def won(message):
-    print(message)
+def won(message, human_won):
     clock = pygame.time.Clock()
+    play_game_graphics.game_finish_prompt(human_won, message)
     while True:
         clock.tick(60)
         for event in pygame.event.get():

@@ -66,9 +66,9 @@ def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
                 if board[i][j] == game_logic.PosTypes.AI:
                     for move in settings["simple_moves"]:
                         if game_logic.legal_move(i, j, i - move[0], j - move[1]):
-                            game_logic.make_move(i, j, i - move[0], j - move[1])
+                            game_logic.make_move_AI(i, j, i - move[0], j - move[1])
                             eval = minmax(board, depth - 1, False, score_heuristic, win_heuristic)
-                            game_logic.make_move(i - move[0], j - move[1], i, j)
+                            game_logic.make_move_AI(i - move[0], j - move[1], i, j)
                             max_eval = max(max_eval, eval)
 
         return max_eval
@@ -80,8 +80,8 @@ def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
                 if board[i][j] == game_logic.PosTypes.HUMAN:
                     for move in settings["simple_moves"]:
                         if game_logic.legal_move(i, j, i + move[0], j + move[1]):
-                            game_logic.make_move(i, j, i + move[0], j + move[1])
+                            game_logic.make_move_AI(i, j, i + move[0], j + move[1])
                             eval = minmax(board, depth - 1, True, score_heuristic, win_heuristic)
-                            game_logic.make_move(i + move[0], j + move[1], i, j)
+                            game_logic.make_move_AI(i + move[0], j + move[1], i, j)
                             min_eval = min(min_eval, eval)
         return min_eval

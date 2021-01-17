@@ -40,7 +40,6 @@ def AI_minmax(board):
                         gained_value = minmax(board, settings["minimax_depth"] * 2 - 1, False, shuffled_settings)
                         game_logic.make_move_AI(i - move[0], j - move[1], i, j)
                         if gained_value > max_value:
-                            print(gained_value, " ", max_value)
                             del ok_moves_queue
                             ok_moves_queue = [[i, j, i - move[0], j - move[1]]]
                             max_value = gained_value

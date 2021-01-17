@@ -41,10 +41,8 @@ def start(settings):
         if not game_logic.there_are_possible_moves(current_turn):
             if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
                 if game_logic.is_AI_turn():
-                    game_logic.print_board_to_console()
                     won("AI player has no moves", True)
                 else:
-                    game_logic.print_board_to_console()
                     won("Human player has no moves", False)
                 playing_game = False
                 continue
@@ -156,8 +154,6 @@ def won(message, human_won):
 
 def AI_turn():
     move = ai_logic.get_next_move()
-    print(move)
     play_game_graphics.clear_cell(move[1], move[0])
     play_game_graphics.draw_player_piece(move[3], move[2], False)
     game_logic.make_move(move[0], move[1], move[2], move[3])
-    game_logic.print_board_to_console()

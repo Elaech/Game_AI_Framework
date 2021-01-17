@@ -9,4 +9,8 @@ def score_method(height, width, board, enum):
                 human_score += (height - i)
             elif board[i][j] == enum.AI:
                 AI_score += (i + 1)
+
+    #print(AI_score ," ", human_score)
+
+
     return AI_score - human_score

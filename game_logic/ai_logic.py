@@ -1,5 +1,7 @@
+import copy
 import math
 from game_logic import game_logic
+import random
 
 settings = None
 score_heuristic = None
@@ -20,22 +22,23 @@ def get_next_move():
 
 
 def AI_minmax(board):
-    print("xxx")
-    print(board)
     initial_line = 0
     initial_column = 0
     after_line = 0
     after_column = 0
+    max_value = -math.inf
+
+    shuffled_settings = copy.deepcopy(settings["simple_moves"])
 
     for i in range(0, settings["board_height"]):
         for j in range(0, settings["board_width"]):
             if board[i][j] == game_logic.PosTypes.AI:
-                max_value = -math.inf
-                for move in settings["simple_moves"]:
+                random.shuffle(shuffled_settings)
+                for move in shuffled_settings:
                     if game_logic.legal_move(i, j, i - move[0], j - move[1], game_logic.PosTypes.AI):
-                        gained_value = minmax(board, 2, True, score_heuristic, win_heuristic)
-                        print(gained_value, " ", max_value)
-                        if gained_value > max_value:
+                        gained_value = minmax(board, 2, True)
+                        if gained_value >= max_value:
+                            print(gained_value, " ", max_value)
                             max_value = gained_value
                             initial_line = i
                             initial_column = j
@@ -45,11 +48,11 @@ def AI_minmax(board):
     return initial_line, initial_column, after_line, after_column
 
 
-def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
+def minmax(board, depth, maximizing_player):
     if depth == 0:
-        return score_heuristic(settings["board_height"], settings["board_width"], board, game_logic.PosTypes)
+        return score_heuristic(settings["board_height"], settings["board_width"], game_logic.board, game_logic.PosTypes)
 
-    win_state = win_heuristic(settings["board_height"], settings["board_width"], board, settings["number_of_pieces"],
+    win_state = win_heuristic(settings["board_height"], settings["board_width"], game_logic.board, settings["number_of_pieces"],
                               game_logic.PosTypes)
 
     if win_state is True:
@@ -67,7 +70,7 @@ def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
                     for move in settings["simple_moves"]:
                         if game_logic.legal_move(i, j, i - move[0], j - move[1], game_logic.PosTypes.AI):
                             game_logic.make_move_AI(i, j, i - move[0], j - move[1])
-                            eval = minmax(board, depth - 1, False, score_heuristic, win_heuristic)
+                            eval = minmax(board, depth - 1, False)
                             game_logic.make_move_AI(i - move[0], j - move[1], i, j)
                             max_eval = max(max_eval, eval)
 
@@ -81,7 +84,7 @@ def minmax(board, depth, maximizing_player, score_heuristic, win_heuristic):
                     for move in settings["simple_moves"]:
                         if game_logic.legal_move(i, j, i + move[0], j + move[1], game_logic.PosTypes.HUMAN):
                             game_logic.make_move_AI(i, j, i + move[0], j + move[1])
-                            eval = minmax(board, depth - 1, True, score_heuristic, win_heuristic)
+                            eval = minmax(board, depth - 1, True)
                             game_logic.make_move_AI(i + move[0], j + move[1], i, j)
                             min_eval = min(min_eval, eval)
         return min_eval

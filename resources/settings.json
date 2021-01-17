@@ -6,7 +6,6 @@
   "board_height": 5,
   "simple_moves": [[-1,-1],[-1,0],[-1,1]],
   "board_blocks": [],
-  "alfa-beta": true,
   "moves_per_turn": 1,
   "number_of_pieces": 5,
   "minimax_depth": 1

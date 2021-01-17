@@ -200,7 +200,7 @@ def draw_settings_menu():
     mg.draw_button(width_proportion * 2, height_proportion * 6,
                    width_proportion * 4, height_proportion * 2, "Board height: " + str(mg.settings["board_height"]))
     mg.draw_button(width_proportion * 2, height_proportion * 9,
-                   width_proportion * 4, height_proportion * 2, "Alfa-beta: " + str(mg.settings["alfa-beta"]))
+                   width_proportion * 4, height_proportion * 2, "Minimax depth: " + str(mg.settings["minimax_depth"]))
     mg.draw_button(width_proportion * 2, height_proportion * 12,
                    width_proportion * 4, height_proportion * 2,
                    "Moves per turn : " + str(mg.settings["moves_per_turn"]))

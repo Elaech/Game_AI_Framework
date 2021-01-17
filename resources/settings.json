@@ -8,5 +8,6 @@
   "board_blocks": [],
   "alfa-beta": true,
   "moves_per_turn": 1,
-  "number_of_pieces": 5
+  "number_of_pieces": 5,
+  "minimax_depth": 1
 }

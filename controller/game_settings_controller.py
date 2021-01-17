@@ -29,7 +29,7 @@ def clicked_on_board_height(mouse):
     return settings_menu_graphics.is_board_height_button_pressed(mouse)
 
 
-def clicked_on_alfabeta(mouse):
+def clicked_on_minimax_depth(mouse):
     return settings_menu_graphics.is_alfa_beta_button_pressed(mouse)
 
 
@@ -68,8 +68,8 @@ def get_callable(mouse):
         return modify_score_method
     elif clicked_on_simple_moves(mouse):
         return modify_simple_moves
-    elif clicked_on_alfabeta(mouse):
-        return modify_alfabeta
+    elif clicked_on_minimax_depth(mouse):
+        return modify_minimax_depth
     elif clicked_on_board_height(mouse):
         return modify_board_height
     elif clicked_on_board_width(mouse):
@@ -242,12 +242,16 @@ def modify_board_height(settings):
     return settings
 
 
-def modify_alfabeta(settings):
-    if settings["alfa-beta"] == True:
-        settings["alfa-beta"] = False
-    else:
-        settings["alfa-beta"] = True
+def modify_minimax_depth(settings):
     pygame.quit()
+    number_text_interface("Change Minimax Depth")
+    try:
+        number = int(input_text)
+        if number < 0:
+            return settings
+        settings["minimax_depth"] = number
+    except Exception:
+        pass
     return settings
 
 

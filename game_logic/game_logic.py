@@ -189,7 +189,7 @@ def there_are_possible_moves(player_type):
                         t = -1
                     if legal_move(i, j, i + move[0] * t, j + move[1] * t, player_type):
                         return True
-
+    print(player_type)
     return False
 
 
@@ -203,8 +203,11 @@ def make_move(initial_line, initial_column, after_line, after_column):
 
 
 def make_move_AI(initial_line, initial_column, after_line, after_column):
-    board[after_line][after_column] = board[initial_line][initial_column]
-    board[initial_line][initial_column] = PosTypes.EMPTY
+    if initial_line == after_line and initial_column == after_column:
+        pass
+    else:
+        board[after_line][after_column] = board[initial_line][initial_column]
+        board[initial_line][initial_column] = PosTypes.EMPTY
 
 
 def is_my_piece(player_type, line, column):

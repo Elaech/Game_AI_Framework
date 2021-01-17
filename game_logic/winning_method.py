@@ -14,4 +14,5 @@ def winning_method(height, width, board, number_of_pieces, enum):
             piece_count += 1
     if number_of_pieces == piece_count:
         return False
-    return None
+    return True
+

@@ -44,6 +44,7 @@ def start(settings):
                     game_logic.print_board_to_console()
                     won("AI player has no moves")
                 else:
+                    game_logic.print_board_to_console()
                     won("Human player has no moves")
                 playing_game = False
                 continue
@@ -155,6 +156,8 @@ def won(message):
 
 def AI_turn():
     move = ai_logic.get_next_move()
+    print(move)
     play_game_graphics.clear_cell(move[1], move[0])
     play_game_graphics.draw_player_piece(move[3], move[2], False)
     game_logic.make_move(move[0], move[1], move[2], move[3])
+    game_logic.print_board_to_console()

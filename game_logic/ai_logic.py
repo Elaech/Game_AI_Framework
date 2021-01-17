@@ -20,6 +20,8 @@ def get_next_move():
 
 
 def AI_minmax(board):
+    print("xxx")
+    print(board)
     initial_line = 0
     initial_column = 0
     after_line = 0
@@ -28,10 +30,11 @@ def AI_minmax(board):
     for i in range(0, settings["board_height"]):
         for j in range(0, settings["board_width"]):
             if board[i][j] == game_logic.PosTypes.AI:
+                max_value = -math.inf
                 for move in settings["simple_moves"]:
-                    max_value = 0
                     if game_logic.legal_move(i, j, i - move[0], j - move[1], game_logic.PosTypes.AI):
                         gained_value = minmax(board, 2, True, score_heuristic, win_heuristic)
+                        print(gained_value, " ", max_value)
                         if gained_value > max_value:
                             max_value = gained_value
                             initial_line = i

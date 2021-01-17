@@ -36,7 +36,9 @@ def AI_minmax(board):
                 random.shuffle(shuffled_settings)
                 for move in shuffled_settings:
                     if game_logic.legal_move(i, j, i - move[0], j - move[1], game_logic.PosTypes.AI):
-                        gained_value = minmax(board, 2, True, shuffled_settings)
+                        game_logic.make_move_AI(i, j, i - move[0], j - move[1])
+                        gained_value = minmax(board, 3, False, shuffled_settings)
+                        game_logic.make_move_AI(i - move[0], j - move[1], i, j)
                         if gained_value > max_value:
                             print(gained_value, " ", max_value)
                             del ok_moves_queue

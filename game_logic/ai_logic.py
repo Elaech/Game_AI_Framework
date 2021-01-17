@@ -19,7 +19,7 @@ def init_ai_logic(options, score_method, winning_method):
 def get_next_move():
     print(AI_minmax(game_logic.board))
     initial_line, initial_column, after_line, after_column = AI_minmax(game_logic.board)
-    game_logic.make_move(initial_column, initial_line, after_column, after_line)
+    game_logic.make_move_AI(initial_line, initial_column, after_line, after_column)
 
 
 

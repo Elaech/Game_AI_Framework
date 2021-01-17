@@ -201,6 +201,11 @@ def make_move(initial_line, initial_column, after_line, after_column):
         charge_up_turn()
 
 
+def make_move_AI(initial_line, initial_column, after_line, after_column):
+    board[after_line][after_column] = board[initial_line][initial_column]
+    board[initial_line][initial_column] = PosTypes.EMPTY
+
+
 def is_my_piece(player_type, line, column):
     if player_type == board[line][column]:
         return True

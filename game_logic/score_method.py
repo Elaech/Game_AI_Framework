@@ -10,4 +10,3 @@ def score_method():
             elif board[i][j] == 1:
                 AI_score += (i + 1)
     return AI_score - human_score
-

@@ -135,7 +135,8 @@ def charge_up_turn():
 
 
 def somebody_won():
-    return winning_function()
+    return winning_function(settings["board_height"], settings["board_width"], board, settings["number_of_pieces"],
+                            PosTypes)
 
 
 def is_pos_within_bounds(line, column):
@@ -146,8 +147,8 @@ def is_pos_within_bounds(line, column):
     return True
 
 
-def legal_move(initial_line, initial_column, after_line, after_column):
-    if is_HUMAN_turn():
+def legal_move(initial_line, initial_column, after_line, after_column, player_type):
+    if player_type == PosTypes.HUMAN:
         if board[initial_line][initial_column] == PosTypes.HUMAN:
             if is_pos_within_bounds(after_line, after_column):
                 if initial_line == after_line and initial_column == after_column:
@@ -161,7 +162,7 @@ def legal_move(initial_line, initial_column, after_line, after_column):
                             if initial_column + move[1] == after_column:
                                 return True
 
-    if is_AI_turn():
+    if player_type == PosTypes.AI:
         if board[initial_line][initial_column] == PosTypes.AI:
             if is_pos_within_bounds(after_line, after_column):
                 if initial_line == after_line and initial_column == after_column:
@@ -186,7 +187,7 @@ def there_are_possible_moves(player_type):
                     t = 1
                     if player_type == PosTypes.AI:
                         t = -1
-                    if legal_move(i, j, i + move[0] * t, j + move[1] * t):
+                    if legal_move(i, j, i + move[0] * t, j + move[1] * t, player_type):
                         return True
 
     return False

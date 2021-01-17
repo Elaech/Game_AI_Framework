@@ -41,6 +41,7 @@ def start(settings):
         if not game_logic.there_are_possible_moves(current_turn):
             if not game_logic.there_are_possible_moves(game_logic.get_other_turn()):
                 if game_logic.is_AI_turn():
+                    game_logic.print_board_to_console()
                     won("AI player has no moves")
                 else:
                     won("Human player has no moves")
@@ -115,7 +116,8 @@ def HUMAN_turn(settings):
                             last_hover = draw_hover(line, column, settings["simple_moves"])
                             play_game_graphics.draw_selected_piece(selected_piece[0], selected_piece[1])
                         elif line == selected_piece[0] and column == selected_piece[1]:
-                            if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line):
+                            if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line,
+                                                     game_logic.PosTypes.HUMAN):
                                 game_logic.make_move(selected_piece[1], selected_piece[0], column, line)
                                 delete_hover(last_hover, selected_piece)
                                 play_game_graphics.clear_cell(selected_piece[0], selected_piece[1])
@@ -128,7 +130,8 @@ def HUMAN_turn(settings):
                             play_game_graphics.draw_selected_piece(selected_piece[0], selected_piece[1])
                             last_hover = draw_hover(line, column, settings["simple_moves"])
                     elif game_logic.is_my_piece(game_logic.PosTypes.EMPTY, column, line) and selected_piece is not None:
-                        if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line):
+                        if game_logic.legal_move(selected_piece[1], selected_piece[0], column, line,
+                                                 game_logic.PosTypes.HUMAN):
                             game_logic.make_move(selected_piece[1], selected_piece[0], column, line)
                             delete_hover(last_hover, selected_piece)
                             play_game_graphics.clear_cell(selected_piece[0], selected_piece[1])
@@ -151,7 +154,7 @@ def won(message):
 
 
 def AI_turn():
-    game_logic.print_board_to_console()
-    ai_logic.get_next_move()
-    game_logic.print_board_to_console()
-    game_logic.charge_up_turn()
+    move = ai_logic.get_next_move()
+    play_game_graphics.clear_cell(move[1], move[0])
+    play_game_graphics.draw_player_piece(move[3], move[2], False)
+    game_logic.make_move(move[0], move[1], move[2], move[3])

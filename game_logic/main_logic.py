@@ -11,6 +11,7 @@ winning_function = None
 settings = None
 board = None
 
+
 def check_winning_method(options, string=None):
     global winning_function
     global settings
@@ -60,44 +61,44 @@ def check_score_method(options, string=None):
 
 
 def test_valid_return_score_method():
-    return_value = score_function()
+    return_value = score_function(settings["board_height"], settings["board_width"], board,game_logic.PosTypes)
     if type(return_value) == float or type(return_value) == int:
-        #print("Score method: valid return")
+        # print("Score method: valid return")
         return True
 
-    #print("Score method error: return value not int nor float")
+    # print("Score method error: return value not int nor float")
     return False
 
 
 def test_valid_return_winning_method():
-    return_value = winning_function()
+    return_value = winning_function(settings["board_height"], settings["board_width"], board,settings["number_of_pieces"],game_logic.PosTypes)
     if type(return_value) == bool or return_value == None:
-        #print("Win condition: valid return")
+        # print("Win condition: valid return")
         return True
 
-    #print("Win condition error: return value not bool")
+    # print("Win condition error: return value not bool")
     return False
 
 
 def test_valid_code_score_method():
     try:
-        a = score_function()
-        #print(a)
+        a = score_function(settings["board_height"], settings["board_width"], board,game_logic.PosTypes)
+        # print(a)
     except Exception as e:
-        #print("Score method error: " + str(e))
+        # print("Score method error: " + str(e))
         return False
 
-    #print("Score method: valid code")
+    # print("Score method: valid code")
     return True
 
 
 def test_valid_code_winning_method():
     try:
-        a = winning_function()
-        #print(a)
+        a = winning_function(settings["board_height"], settings["board_width"], board,settings["number_of_pieces"],game_logic.PosTypes)
+        # print(a)
     except Exception as e:
-        #print("Win condition error: " + str(e))
+        # print("Win condition error: " + str(e))
         return False
 
-    #print("Win condition: valid code")
+    # print("Win condition: valid code")
     return True
